@@ -29,11 +29,12 @@
                   Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                   Padding="8" Height="506" Grid.ColumnSpan="2">
             <StackPanel>
-                <Image Source="../images/Quinta.png" x:Name="image" Height="136"/><TextBox Name="email" Margin="211,16,199,8" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Email"/>
+                <Image Source="../images/Quinta.png" x:Name="image" Height="136" StretchDirection="DownOnly" Tag="" Cursor="None"/>
+                <TextBox Name="email" Margin="211,16,199,8" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Email"/>
                 <PasswordBox Name="password" Margin="211,4,199,0" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Mot de Passe" />
                 <Separator Style="{StaticResource MaterialDesignLightSeparator}" Margin="121,50,105,0"/>
                 <Button Margin="246,40,239,0" Height="40" Content="Connecter" Click="Connect_Button"/>
-                
+
 
             </StackPanel>
         </materialDesign:Card>

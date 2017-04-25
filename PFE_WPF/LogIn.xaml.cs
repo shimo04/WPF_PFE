@@ -14,7 +14,7 @@ namespace PFE_WPF
     {
 
         public const string GoogleClientId = "<GOOGLE CLIENT ID>"; // https://console.developers.google.com/apis/credentials
-        public const string FirebaseAppKey = "<FIREBASE APP KEY>"; // https://console.firebase.google.com/
+        public const string f = "<FIREBASE APP KEY>"; // https://console.firebase.google.com/
         public const string FirebaseAppUrl = "https://applicationcliente.firebaseio.com/";
         public const string FirebaseApiKey = "AIzaSyCvoKY814M1ipT2A2OPp16VJCxRKqAXkpQ";
 
@@ -32,21 +32,26 @@ namespace PFE_WPF
                 //For some reason, both Login and Signup return error.
                 //You might need to check your console.
 
-
-                //await InitializeConnexionAsync(LoginAsync);
-                await InitializeConnexionAsync(SignupAsync);
+                await InitializeConnexionAsync(LoginAsync);
             }
             catch (Exception ex)
             {
                 loginSuccess = false;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Try again");
             }
             finally
             {
                 if (loginSuccess)
+                {
                     MessageBox.Show("Success");
+                   // var Home = new Home();
+                   // Home.Show();
+                   // this.Close();
+                }
             }
         }
+
         public async Task InitializeConnexionAsync(Func<string,string,Task<string>> action)
         {
             string em = email.Text;
@@ -57,7 +62,7 @@ namespace PFE_WPF
             });
 
             var result = await firebase.Child("/").OnceAsync<object>();
-            MessageBox.Show(result.Count.ToString());
+            //MessageBox.Show(result.Count.ToString());
 
         }
 
@@ -72,11 +77,11 @@ namespace PFE_WPF
             return auth.FirebaseToken;
         }
 
-        private static async Task<string> SignupAsync(string email, string password)
-        {
-            var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
-            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
-            return auth.FirebaseToken;
-        }
+        //private static async Task<string> SignupAsync(string email, string password)
+       // {
+           // var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
+           // var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
+           // return auth.FirebaseToken;
+       // }
     }
 }
