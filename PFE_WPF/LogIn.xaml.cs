@@ -60,10 +60,13 @@ namespace PFE_WPF
             MessageBox.Show(result.Count.ToString());
 
         }
+
+        //This is normallly done on the server.
+        //Exposing FirebaseApiKey on the client is not good.
+        //If you can't do this on server, consider using 3rd party providers like Facebook, Google.
+        //Auth0 is a good service for this as Firebase does not provider 3rd party authentication for .NET
         private static async Task<string> LoginAsync(string email, string password)
         {
-            //This is normallly done on the server.
-            //Exposing FirebaseApiKey on the client is not good.
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
             var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
             return auth.FirebaseToken;
