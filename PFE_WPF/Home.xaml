@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PFE_WPF"
         mc:Ignorable="d"
-        Title="Home" Height="600" Width="900" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize" Icon="../images/Quinta.png">
+        Title="Home" Height="600" Width="900" WindowStyle="ToolWindow" ResizeMode="NoResize">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -19,8 +19,14 @@
     </Window.Resources>
 
     <Grid>
-        <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">Second Window</TextBlock>
-        </materialDesign:Card>
+        <DockPanel>
+            <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False" x:Name="MenuToggleButton" Height="Auto" Margin="0,0,0,539"/>
+            <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="0,0,0,539">
+                <StackPanel>
+                    <Button Content="Se déconnécter"  Click="LogOut_OnClick"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Height="33" Margin="0,0,0,539">Bienvenue</TextBlock>
+        </DockPanel>
     </Grid>
 </Window>

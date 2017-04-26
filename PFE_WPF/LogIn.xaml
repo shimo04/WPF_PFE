@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PFE_WPF"
         mc:Ignorable="d"
-        Title="LogIn" Height="534.5" Width="700" WindowStyle="ToolWindow" ResizeMode="NoResize">
+        Title="LogIn" Height="503" Width="631" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded" ShowInTaskbar="False" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -16,33 +16,28 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1031*"/>
-            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="119*"/>
+            <ColumnDefinition Width="389*"/>
+            <ColumnDefinition Width="66*"/>
+            <ColumnDefinition Width="51*"/>
         </Grid.ColumnDefinitions>
 
-        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                  Padding="8" Height="506" Grid.ColumnSpan="2">
+        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" Height="475" Grid.ColumnSpan="4">
             <StackPanel>
-                <Image Source="../images/Quinta.png" x:Name="image" Height="136" StretchDirection="DownOnly" Tag="" Cursor="None"/>
+                <Image Source="../images/Quinta.png" x:Name="image" Height="136"/>
                 <TextBox Name="email" Margin="211,16,199,8" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Email"/>
                 <PasswordBox Name="password" Margin="211,4,199,0" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Mot de Passe" />
                 <Separator Style="{StaticResource MaterialDesignLightSeparator}" Margin="121,50,105,0"/>
                 <Button Margin="246,40,239,0" Height="40" Content="Connecter" Click="Connect_Button"/>
-
-
+                <ProgressBar Name="Progress" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12 12 12 12" Visibility="Hidden"/>
             </StackPanel>
         </materialDesign:Card>
-
-        <!--
-            For the Card styled <Flipper />, bring in this resource dictionary (see top of this file)
-            pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml        
-        -->
-
     </Grid>
 </Window>

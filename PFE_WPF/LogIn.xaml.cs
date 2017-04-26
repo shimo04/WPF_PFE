@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
 using Firebase.Database;
+using System.Threading;
 
 namespace PFE_WPF
 {
@@ -28,31 +29,38 @@ namespace PFE_WPF
             bool loginSuccess = true;
             try
             {
+                Progress.Visibility = Visibility.Visible;
                 //To test, first run SignupAsync, then run LoginAsync
                 //For some reason, both Login and Signup return error.
                 //You might need to check your console.
-
+                //ThreadPool.QueueUserWorkItem(this.MyProgression);         
                 await InitializeConnexionAsync(LoginAsync);
+                var Home = new Home();
+                Home.Show();
+                this.Close();
             }
             catch (Exception ex)
             {
                 loginSuccess = false;
                 //MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                MessageBox.Show("Try again");
+               // MessageBox.Show("Try again");
+               MessageBoxResult x = MessageBox.Show("Try", "again", MessageBoxButton.OK);
+              if(x == MessageBoxResult.OK)
+                {
+                    Progress.Visibility = Visibility.Hidden;
+                }
+
             }
             finally
             {
                 if (loginSuccess)
                 {
                     MessageBox.Show("Success");
-                   // var Home = new Home();
-                   // Home.Show();
-                   // this.Close();
                 }
             }
         }
 
-        public async Task InitializeConnexionAsync(Func<string,string,Task<string>> action)
+        public async Task InitializeConnexionAsync(Func<string, string, Task<string>> action)
         {
             string em = email.Text;
             string pass = password.Password;
@@ -77,11 +85,16 @@ namespace PFE_WPF
             return auth.FirebaseToken;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Progress.IsEnabled = false;
+        }
+
         //private static async Task<string> SignupAsync(string email, string password)
-       // {
-           // var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
-           // var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
-           // return auth.FirebaseToken;
-       // }
+        // {
+        // var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
+        // var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
+        // return auth.FirebaseToken;
+        // }
     }
 }

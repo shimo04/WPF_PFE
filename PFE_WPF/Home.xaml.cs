@@ -23,5 +23,12 @@ namespace PFE_WPF
         {
             InitializeComponent();
         }
+
+        public void LogOut_OnClick (object sender, RoutedEventArgs e)
+        {
+            var LogIn = new LogIn();
+            LogIn.Show();
+            this.Close();
+        }
     }
 }
