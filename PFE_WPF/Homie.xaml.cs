@@ -31,11 +31,12 @@ namespace PFE_WPF
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
-            var dinos = await firebase.Child("y9chuOyRbRRtD0KsPhQqKT9ETeC3").Child("movies").OrderByKey().StartAt("fjj").OnceAsync<Movies>();
+            var dinos = await firebase.Child("vCUE0zWFH8fl9YDgdy8Ta5Oe4Bd2").Child("movies").OrderByKey().OnceAsync<Movies>();
             foreach (var dino in dinos)
             {
-                MessageBox.Show ( $"Titre est { dino.Key} : production est { dino.Object.Production} et realisateur est { dino.Object.Realisateur}".ToString());
-                //var res = $"{ dino.Key} is { dino.Object.Height}m high.".ToString();
+                MessageBox.Show ( $"Titre est { dino.Key} : production est { dino.Object.Production} et realisateur est { dino.Object.Realisateur}.");
+                
+                //var res = $"{ dino.Key} is { dino.Object.Production}m high.".ToString();
                 //MessageBox.Show(res);
                 //MessageBox.Show($"{ dino.Key} is { dino.Object.Order}m high.”");
             }
