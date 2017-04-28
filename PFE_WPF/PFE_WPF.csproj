@@ -104,12 +104,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="Dinosaur.cs" />
+    <Compile Include="Homie.xaml.cs">
+      <DependentUpon>Homie.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogIn.xaml.cs">
       <DependentUpon>LogIn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Movies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -140,7 +142,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Home.xaml">
+    <Page Include="Homie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

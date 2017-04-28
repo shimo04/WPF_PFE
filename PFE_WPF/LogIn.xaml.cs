@@ -30,13 +30,10 @@ namespace PFE_WPF
             try
             {
                 Progress.Visibility = Visibility.Visible;
-                //To test, first run SignupAsync, then run LoginAsync
-                //For some reason, both Login and Signup return error.
-                //You might need to check your console.
-                //ThreadPool.QueueUserWorkItem(this.MyProgression);         
+        
                 await InitializeConnexionAsync(LoginAsync);
-                var Home = new Home();
-                Home.Show();
+                var Homie = new Homie();
+                Homie.Show();
                 this.Close();
             }
             catch (Exception ex)
@@ -49,13 +46,16 @@ namespace PFE_WPF
                 {
                     Progress.Visibility = Visibility.Hidden;
                 }
-
             }
             finally
             {
                 if (loginSuccess)
                 {
-                    MessageBox.Show("Success");
+                    MessageBoxResult x = MessageBox.Show("Suce", "ss", MessageBoxButton.OK);
+                    if (x == MessageBoxResult.OK)
+                    {
+                        Progress.Visibility = Visibility.Hidden;
+                    }
                 }
             }
         }
@@ -74,10 +74,6 @@ namespace PFE_WPF
 
         }
 
-        //This is normallly done on the server.
-        //Exposing FirebaseApiKey on the client is not good.
-        //If you can't do this on server, consider using 3rd party providers like Facebook, Google.
-        //Auth0 is a good service for this as Firebase does not provider 3rd party authentication for .NET
         private static async Task<string> LoginAsync(string email, string password)
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
@@ -87,7 +83,7 @@ namespace PFE_WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //Progress.IsEnabled = false;
+
         }
 
         //private static async Task<string> SignupAsync(string email, string password)

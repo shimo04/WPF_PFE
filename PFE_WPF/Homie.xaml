@@ -1,0 +1,60 @@
+﻿<Window x:Class="PFE_WPF.Homie"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PFE_WPF"
+        mc:Ignorable="d"
+        Title="Home" Height="600" Width="900" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid RenderTransformOrigin="0.504,0.573">
+        <materialDesign:ColorZone Mode="PrimaryMid" Padding="16">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal"
+                            materialDesign:RippleAssist.IsCentered="True">
+                    <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                    <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                   Margin="16 0 0 0"
+                                   materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                            </Button>
+                            <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Chercher" 
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                     MinWidth="200" VerticalAlignment="Center" />
+                        </Grid>
+                    </materialDesign:ColorZone>
+                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0"/>
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="846,20,0,512" RenderTransformOrigin="12.294,1.512" Width="38">
+            <ListBox>
+                <ListBoxItem Content="Se deconnecter" Name="LogOut"/>
+            </ListBox>
+        </materialDesign:PopupBox>
+
+        <TextBlock x:Name="res" TextWrapping="Wrap" Margin="32,95,711,386" Background="{DynamicResource PrimaryHueDarkBrush}"/>
+    </Grid>
+</Window>
