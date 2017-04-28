@@ -35,10 +35,6 @@ namespace PFE_WPF
             foreach (var dino in dinos)
             {
                 MessageBox.Show ( $"Titre est { dino.Key} : production est { dino.Object.Production} et realisateur est { dino.Object.Realisateur}.");
-                
-                //var res = $"{ dino.Key} is { dino.Object.Production}m high.".ToString();
-                //MessageBox.Show(res);
-                //MessageBox.Show($"{ dino.Key} is { dino.Object.Order}m high.”");
             }
         }
     }
