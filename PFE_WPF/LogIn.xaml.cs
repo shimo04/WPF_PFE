@@ -8,12 +8,14 @@ using System.Diagnostics;
 using System.Net.Http;
 using Firebase.Database;
 using System.Threading;
+using System.Linq;
+using MaterialDesignThemes.Wpf;
 
 namespace PFE_WPF
 {
     public partial class LogIn : Window
     {
-
+        public static String UID { get; set; }
         public const string GoogleClientId = "<GOOGLE CLIENT ID>"; // https://console.developers.google.com/apis/credentials
         public const string f = "<FIREBASE APP KEY>"; // https://console.firebase.google.com/
         public const string FirebaseAppUrl = "https://applicationcliente.firebaseio.com/";
@@ -30,18 +32,15 @@ namespace PFE_WPF
             try
             {
                 Progress.Visibility = Visibility.Visible;
-        
                 await InitializeConnexionAsync(LoginAsync);
-                var Homie = new Homie();
+                var Homie = new Homie(UID);
                 Homie.Show();
                 this.Close();
             }
             catch (Exception ex)
             {
-                loginSuccess = false;
-                //MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-               // MessageBox.Show("Try again");
-               MessageBoxResult x = MessageBox.Show("Try", "again", MessageBoxButton.OK);
+              loginSuccess = false;
+              MessageBoxResult x = MessageBox.Show("Try", "again", MessageBoxButton.OK);
               if(x == MessageBoxResult.OK)
                 {
                     Progress.Visibility = Visibility.Hidden;
@@ -51,7 +50,7 @@ namespace PFE_WPF
             {
                 if (loginSuccess)
                 {
-                    MessageBoxResult x = MessageBox.Show("Suce", "ss", MessageBoxButton.OK);
+                    MessageBoxResult x = MessageBox.Show("Note", "sucess", MessageBoxButton.OK);
                     if (x == MessageBoxResult.OK)
                     {
                         Progress.Visibility = Visibility.Hidden;
@@ -78,6 +77,7 @@ namespace PFE_WPF
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(FirebaseApiKey));
             var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
+            UID = auth.User.LocalId.ToString();
             return auth.FirebaseToken;
         }
 

@@ -23,15 +23,21 @@ namespace PFE_WPF
     /// </summary>
     public partial class Homie : Window
     {
+        public String id;
         public Homie()
         {
+        }
+
+        public Homie (String cle)
+        {
             InitializeComponent();
+            this.id = cle;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
-            var dinos = await firebase.Child("vCUE0zWFH8fl9YDgdy8Ta5Oe4Bd2").Child("movies").OrderByKey().OnceAsync<Movies>();
+            var dinos = await firebase.Child(id).Child("movies").OrderByKey().OnceAsync<Movies>();
             foreach (var dino in dinos)
             {
                 MessageBox.Show ( $"Titre est { dino.Key} : production est { dino.Object.Production} et realisateur est { dino.Object.Realisateur}.");
