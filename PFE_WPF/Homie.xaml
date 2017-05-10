@@ -6,11 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PFE_WPF"
         mc:Ignorable="d"
-        Title="Home" Height="600" Width="900" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="Home" Height="700" Width="900" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded">
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
@@ -22,7 +24,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid RenderTransformOrigin="0.504,0.573">
+    <Grid RenderTransformOrigin="0.504,0.573" Name="Grd">
         <materialDesign:ColorZone Mode="PrimaryMid" Padding="16">
             <DockPanel>
                 <StackPanel Orientation="Horizontal"
@@ -49,12 +51,18 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="846,20,0,512" RenderTransformOrigin="12.294,1.512" Width="38">
+        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="846,0,0,600" RenderTransformOrigin="12.294,1.512" Width="38">
             <ListBox>
                 <ListBoxItem Content="Se deconnecter" Name="LogOut"/>
             </ListBox>
         </materialDesign:PopupBox>
-
-        <TextBlock x:Name="res" TextWrapping="Wrap" Margin="32,95,711,386" Background="{DynamicResource PrimaryHueDarkBrush}"/>
+        <Grid Name="gr" Margin="0,72,0,-237">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
     </Grid>
 </Window>

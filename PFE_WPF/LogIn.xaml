@@ -20,7 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="119*"/>
@@ -31,13 +31,17 @@
 
         <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" Height="475" Grid.ColumnSpan="4">
             <StackPanel>
-                <Image Source="../images/Quinta.png" x:Name="image" Height="136"/>
+                <Image Source="C:\Users\lUnA ShImO\Documents\Visual Studio 2015\Projects\PFE_WPF\PFE_WPF\Resources\Quinta.png" x:Name="image" Height="136" Margin="0,0,20,0"/>
                 <TextBox Name="email" Margin="211,16,199,8" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Email"/>
                 <PasswordBox Name="password" Margin="211,4,199,0" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Mot de Passe" />
                 <Separator Style="{StaticResource MaterialDesignLightSeparator}" Margin="121,50,105,0"/>
-                <Button Margin="246,40,239,0" Height="40" Content="Connecter" Click="Connect_Button"/>
+                <Button Margin="246,40,239,0" Height="44" Content="Connecter" Click="Connect_Button" Background="#FFBE8F45"/>
                 <ProgressBar Name="Progress" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="12 12 12 12" Visibility="Hidden"/>
             </StackPanel>
         </materialDesign:Card>
+        <materialDesign:PackIcon Kind="Account" Margin="68,177,0,0" Grid.Column="1" Height="29" Width="30"/>
+        <materialDesign:PackIcon Grid.Column="1" Kind="Key"
+                                 Margin="67,233,0,0"
+                                 Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" Height="22" Width="31" />
     </Grid>
 </Window>
