@@ -122,7 +122,8 @@ namespace PFE_WPF
                 pop.Padding = new Thickness(2, 0, 2, 0);
                 Button more = new Button();
                 more.Content = pop;
-               
+                var mT = dino.Key;
+                more.Click += (Object, RoutedEventArgs) => { Movie_Click(sender, e, mT); };
 
                 stackP.Children.Add(more);
                 Grid.SetRow(stackP, 2);
@@ -144,6 +145,20 @@ namespace PFE_WPF
                 //MessageBox.Show ( $"Titre est { dino.Key} : production est { dino.Object.Production} 
                 //et realisateur est { dino.Object.Realisateur}.");           
             }
+        }
+        private async void Movie_Click(object sender, RoutedEventArgs e, String mt)
+        {
+            var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
+            var dinos = await firebase.Child(id).Child("movies").Child(mt.ToString()).Child("Sequence").OrderByKey().OnceAsync<Sequence>();
+            foreach (var dino in dinos)
+            {
+
+                MessageBox.Show(dino.Key.ToString());
+                MessageBox.Show(dino.Object.Plans.ToString());
+
+            }
+
+
         }
     }
 }
