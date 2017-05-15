@@ -146,6 +146,38 @@ namespace PFE_WPF
                 //et realisateur est { dino.Object.Realisateur}.");           
             }
         }
+        private async void Movie_Click(object sender, RoutedEventArgs e, String mt)
+        {
+            gr.Children.Clear();
+           /* try
+            {*/
+                var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
+                var dinos = await firebase.Child(id).Child("movies").Child(mt.ToString()).Child("Sequence").OrderByKey().OnceAsync<Movies>();
+                foreach (var dino in dinos)
+                {
+                    MessageBox.Show(dino.Key);
+                    var chilDinos = await firebase.Child(id).Child("movies").Child(mt).Child("Sequence").Child(dino.Key).Child("plans").OrderByKey().OnceAsync<Plan>();
+                    foreach (var chh in chilDinos)
+                    {
+                        MessageBox.Show(chh.Object.seq + " " + chh.Object.plan + " " + chh.Object.objectif + " ");
+                        /*var vl = await firebase.Child(id).Child("movies").Child(mt).Child("Sequence").Child(dino.Key).Child("plans").Child(chh.Key).Child("date").OrderByKey().OnceAsync<Date>();
+                        foreach(var v in vl)
+                        {
+                            MessageBox.Show(v.Object.annee + " " + v.Object.jour + " " + v.Object.mois + " ");
+                        }*/
 
+                    }
+
+
+
+                }
+            /*}catch(Firebase.Database.FirebaseException exp)
+            {
+                MessageBox.Show(exp.Message);
+            }*/
+            
+            
+
+        }
     }
 }

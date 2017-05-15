@@ -11,5 +11,6 @@ namespace PFE_WPF
         public String Production { get; set; }
         public String Realisateur { get; set; }
         public String Titre { get; set; }
-    }
+        public String Plan { get; set; }
+    }   
 }

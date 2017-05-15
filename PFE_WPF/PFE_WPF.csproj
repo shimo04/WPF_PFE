@@ -110,6 +110,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Date.cs" />
+    <Compile Include="Plan.cs" />
+    <Compile Include="Prise.cs" />
     <Compile Include="Sequence.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
