@@ -84,7 +84,7 @@ namespace PFE_WPF
                 Image img = new Image();
                 img.Height = 140;
                 img.HorizontalAlignment = HorizontalAlignment.Stretch;
-                img.Source = new BitmapImage(new Uri("C:\\Users\\lUnA ShImO\\Documents\\Visual Studio 2015\\Projects\\PFE_WPF\\PFE_WPF\\Resources\\Chartridge046_small.jpg"));
+                //img.Source = new BitmapImage(new Uri("C:\\Users\\lUnA ShImO\\Documents\\Visual Studio 2015\\Projects\\PFE_WPF\\PFE_WPF\\Resources\\Chartridge046_small.jpg"));
                 g.Children.Add(img);
 
 
@@ -146,19 +146,6 @@ namespace PFE_WPF
                 //et realisateur est { dino.Object.Realisateur}.");           
             }
         }
-        private async void Movie_Click(object sender, RoutedEventArgs e, String mt)
-        {
-            var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
-            var dinos = await firebase.Child(id).Child("movies").Child(mt.ToString()).Child("Sequence").OrderByKey().OnceAsync<Sequence>();
-            foreach (var dino in dinos)
-            {
 
-                MessageBox.Show(dino.Key.ToString());
-                MessageBox.Show(dino.Object.Plans.ToString());
-
-            }
-
-
-        }
     }
 }
