@@ -23,6 +23,5 @@ namespace PFE_WPF
         public String seq { get; set; }
         public String sonOption { get; set; }
         public String urlImageLink { get; set; }
-        public List<Prise> listPrise;
     }
 }

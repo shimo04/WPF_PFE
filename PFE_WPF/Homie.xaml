@@ -24,7 +24,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid RenderTransformOrigin="0.504,0.573" Name="Grd">
+    <Grid Name="Grd">
         <materialDesign:ColorZone Mode="PrimaryMid" Padding="16">
             <DockPanel>
                 <StackPanel Orientation="Horizontal"
@@ -56,13 +56,20 @@
                 <ListBoxItem Content="Se deconnecter" Name="LogOut"/>
             </ListBox>
         </materialDesign:PopupBox>
-        <Grid Name="gr" Margin="0,72,0,-237">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-        </Grid>
+
+        <ScrollViewer  
+            Margin="0,72,0,0" VerticalScrollBarVisibility = "Auto">
+            <Grid Name="gr">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>
