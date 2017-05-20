@@ -143,9 +143,7 @@ namespace PFE_WPF
                 grdEspace.RowDefinitions.Add(row2Front);
 
                 TextBlock t = new TextBlock();
-                t.Text = "";
-
-                
+                t.Text = "";            
 
                 Card cd = new Card();
                 //cd.HorizontalAlignment = HorizontalAlignment.Left;
@@ -399,6 +397,28 @@ namespace PFE_WPF
 
                     gridFinal.Children.Add(stack);
 
+                    Grid grdEspace = new Grid();
+
+                    // Create Rows  
+                    RowDefinition row1 = new RowDefinition();
+                    GridLengthConverter gridLengthConverter1 = new GridLengthConverter();
+                    row1.Height = (GridLength)gridLengthConverter1.ConvertFrom("*");
+                    RowDefinition row2 = new RowDefinition();
+                    GridLengthConverter gridLengthConverter2 = new GridLengthConverter();
+                    row2.Height = (GridLength)gridLengthConverter2.ConvertFrom("Auto");
+                    RowDefinition row3 = new RowDefinition();
+                    GridLengthConverter gridLengthConverter3 = new GridLengthConverter();
+                    row3.Height = (GridLength)gridLengthConverter3.ConvertFrom("Auto");
+
+                    grdEspace.RowDefinitions.Add(row1);
+                    grdEspace.RowDefinitions.Add(row2);
+                    grdEspace.RowDefinitions.Add(row3);
+
+                    TextBlock t = new TextBlock();
+                    t.Text = "";
+                    TextBlock t2 = new TextBlock();
+                    t2.Text = "";
+
                     Card cd = new Card();
                      
 
@@ -411,10 +431,16 @@ namespace PFE_WPF
                     ShadowAssist.SetShadowDepth(cd, ShadowDepth.Depth5);
                     cd.Content = gridFinal;
 
-                    Grid.SetRow(cd, j);
-                    Grid.SetColumn(cd, i);
+                    grdEspace.Children.Add(t2);
+                    Grid.SetRow(cd, 1);
+                    grdEspace.Children.Add(cd);
+                    Grid.SetRow(t, 2);
+                    grdEspace.Children.Add(t);
 
-                    gr.Children.Add(cd);
+                    Grid.SetRow(grdEspace, j);
+                    Grid.SetColumn(grdEspace, i);
+
+                    gr.Children.Add(grdEspace);
                     i++;
                 }
             }
