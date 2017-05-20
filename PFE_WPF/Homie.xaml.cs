@@ -190,19 +190,17 @@ namespace PFE_WPF
                     /////////// front ///////////////////////
 
                     Grid gridFront = new Grid();
-                    gridFront.VerticalAlignment = VerticalAlignment.Stretch;
+                    gridFront.ShowGridLines = true;
                     gridFront.Width = 390;
                     gridFront.Height = 340;
 
                     // Create Rows  
                     RowDefinition row1Front = new RowDefinition();
                     GridLengthConverter gridLengthConverterrow1 = new GridLengthConverter();
-                    row1Front.Height = (GridLength)gridLengthConverterrow1.ConvertFrom("Auto");
+                    row1Front.Height = (GridLength)gridLengthConverterrow1.ConvertFrom("*");
                     RowDefinition row2Front = new RowDefinition();
                     GridLengthConverter gridLengthConverterrow2 = new GridLengthConverter();
                     row2Front.Height = (GridLength)gridLengthConverterrow2.ConvertFrom("*");
-
-
 
                     gridFront.RowDefinitions.Add(row1Front);
                     gridFront.RowDefinitions.Add(row2Front);
@@ -210,7 +208,12 @@ namespace PFE_WPF
 
                     // Create Columns
                     ColumnDefinition colFront1 = new ColumnDefinition();
+                    colFront1.Width = new GridLength(120);
                     ColumnDefinition colFront2 = new ColumnDefinition();
+                    GridLengthConverter gridLengthConvertercol = new GridLengthConverter();
+                    colFront2.Width = (GridLength)gridLengthConvertercol.ConvertFrom("Auto");
+                    
+
                     gridFront.ColumnDefinitions.Add(colFront1);
                     gridFront.ColumnDefinitions.Add(colFront2);
 
@@ -219,7 +222,6 @@ namespace PFE_WPF
                     front.FrontContent = gridFront;
 
                     Image img = new Image();
-                    img.Height = 140;
                     img.HorizontalAlignment = HorizontalAlignment.Stretch;
                     img.Source = new BitmapImage(new Uri(pln.Object.urlImageLink));
 
