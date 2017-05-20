@@ -129,6 +129,24 @@ namespace PFE_WPF
                 Grid.SetRow(stackP, 2);
                 g.Children.Add(stackP);
 
+                Grid grdEspace = new Grid();
+
+                // Create Rows  
+                RowDefinition row1Front = new RowDefinition();
+                GridLengthConverter gridLengthConverterrow1 = new GridLengthConverter();
+                row1Front.Height = (GridLength)gridLengthConverterrow1.ConvertFrom("*");
+                RowDefinition row2Front = new RowDefinition();
+                GridLengthConverter gridLengthConverterrow2 = new GridLengthConverter();
+                row2Front.Height = (GridLength)gridLengthConverterrow2.ConvertFrom("Auto");
+
+                grdEspace.RowDefinitions.Add(row1Front);
+                grdEspace.RowDefinitions.Add(row2Front);
+
+                TextBlock t = new TextBlock();
+                t.Text = "";
+
+                
+
                 Card cd = new Card();
                 //cd.HorizontalAlignment = HorizontalAlignment.Left;
                 ShadowAssist.SetShadowDepth(cd, ShadowDepth.Depth5);
@@ -136,10 +154,15 @@ namespace PFE_WPF
                 cd.Width = 200;
                 cd.Content = g;
 
-                Grid.SetRow(cd, j);
-                Grid.SetColumn(cd, i);
+                grdEspace.Children.Add(cd);
+                Grid.SetRow(t,1);
+                grdEspace.Children.Add(t);
 
-                gr.Children.Add(cd);
+                Grid.SetRow(grdEspace, j);
+                Grid.SetColumn(grdEspace, i);
+
+                gr.Children.Add(grdEspace);
+
 
                 i++;
                 //MessageBox.Show ( $"Titre est { dino.Key} : production est { dino.Object.Production} 
@@ -237,29 +260,30 @@ namespace PFE_WPF
                     StackPanel SeqPlan = new StackPanel();
                     SeqPlan.Orientation = Orientation.Vertical;
                     SeqPlan.HorizontalAlignment = HorizontalAlignment.Center;
+                    SeqPlan.VerticalAlignment = VerticalAlignment.Center;
 
-                    //TextBlock titre = new TextBlock();
-                    //titre.Text = pln.Key + " / " + pln.Object.seq;
                     Button more = new Button();
-                    //moreStyle = (Style)Resources["{StaticResource MaterialDesignToolPopupBox}"];
+                    //Style moreStyle = (Style)Resources["{DynamicResource MaterialDesignFloatingActionMiniButton}"];
                     //more.Style = moreStyle;
                     more.Command = Flipper.FlipCommand;
                     more.Width = 70;
                     more.HorizontalAlignment = HorizontalAlignment.Center;
-                    more.Content = "more";
-                    
+                    more.Content = "More!";
+                    ShadowAssist.SetShadowDepth(more, ShadowDepth.Depth5);
 
-                    Chip ch1 = new Chip();
-                    ch1.Content = pln.Key + " / " + pln.Object.seq; 
-                    
 
-                    SeqPlan.Children.Add(ch1);
-                    //SeqPlan.Children.Add(titre);
+                    Chip titre = new Chip();
+                    titre.Content = " Seq " + pln.Object.seq + " / Pln " + pln.Key;
+                    titre.HorizontalAlignment = HorizontalAlignment.Center;
+                    Label lb = new Label();
+                    
+                    SeqPlan.Children.Add(titre);
+                    SeqPlan.Children.Add(lb);
                     SeqPlan.Children.Add(more);
 
 
-                    Grid.SetColumn(SeqPlan, 1);
-                    Grid.SetRow(SeqPlan, 0);
+                    Grid.SetColumn(SeqPlan, 0);
+                    Grid.SetRow(SeqPlan, 1);
                     gridFront.Children.Add(SeqPlan);
 
 
@@ -373,12 +397,15 @@ namespace PFE_WPF
                     stack.Children.Add(front);
 
 
-
                     gridFinal.Children.Add(stack);
 
-
                     Card cd = new Card();
+                     
 
+                    //BrushConverter bc = new BrushConverter();
+                    //Brush brush = (Brush)bc.ConvertFrom("{DynamicResource PrimaryHueDarkBrush}");
+                   //brush.Freeze();
+                   // cd.Background = brush;
                     cd.Height = 350;
                     cd.Width = 400;
                     ShadowAssist.SetShadowDepth(cd, ShadowDepth.Depth5);
