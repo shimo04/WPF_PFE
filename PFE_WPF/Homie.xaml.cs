@@ -191,8 +191,8 @@ namespace PFE_WPF
 
                     Grid gridFront = new Grid();
                     gridFront.VerticalAlignment = VerticalAlignment.Stretch;
-                    gridFront.Width = 400;
-                    gridFront.Height = 350;
+                    gridFront.Width = 390;
+                    gridFront.Height = 340;
 
                     // Create Rows  
                     RowDefinition row1Front = new RowDefinition();
@@ -229,34 +229,37 @@ namespace PFE_WPF
 
                     //colorzoneFront.Content = img;
 
+
                     gridFront.Children.Add(img);
 
                     StackPanel SeqPlan = new StackPanel();
-                    SeqPlan.VerticalAlignment = VerticalAlignment.Center;
+                    SeqPlan.Orientation = Orientation.Vertical;
                     SeqPlan.HorizontalAlignment = HorizontalAlignment.Center;
 
-                    TextBlock titre = new TextBlock();
-                    titre.Text = pln.Key + " / " + pln.Object.seq;
+                    //TextBlock titre = new TextBlock();
+                    //titre.Text = pln.Key + " / " + pln.Object.seq;
                     Button more = new Button();
-                    Style moreStyle = (Style)Resources["{StaticResource MaterialDesignToolPopupBox}"];
-                    more.Style = moreStyle;
+                    //moreStyle = (Style)Resources["{StaticResource MaterialDesignToolPopupBox}"];
+                    //more.Style = moreStyle;
                     more.Command = Flipper.FlipCommand;
+                    more.Width = 70;
+                    more.HorizontalAlignment = HorizontalAlignment.Center;
                     more.Content = "more";
-                    more.Margin = new Thickness(0, 4, 0, 0);
+                    
 
                     Chip ch1 = new Chip();
-                    ch1.Content = "hi";
+                    ch1.Content = pln.Key + " / " + pln.Object.seq; 
                     
 
                     SeqPlan.Children.Add(ch1);
-                    SeqPlan.Children.Add(titre);
+                    //SeqPlan.Children.Add(titre);
                     SeqPlan.Children.Add(more);
 
 
                     Grid.SetColumn(SeqPlan, 1);
+                    Grid.SetRow(SeqPlan, 0);
                     gridFront.Children.Add(SeqPlan);
 
-                    //stack.Children.Add(front);
 
                     ///////////////////////// back ///////////////////
                     Grid gridBack = new Grid();
@@ -273,6 +276,12 @@ namespace PFE_WPF
 
                     gridBack.RowDefinitions.Add(row1Back);
                     gridBack.RowDefinitions.Add(row2Back);
+
+                    // Create Columns
+                    ColumnDefinition colBack1 = new ColumnDefinition();
+                    ColumnDefinition colBack2 = new ColumnDefinition();
+                    gridBack.ColumnDefinitions.Add(colBack1);
+                    gridBack.ColumnDefinitions.Add(colBack2);
 
                     front.Padding = new Thickness(6);
                     front.BackContent = gridBack;
@@ -299,37 +308,57 @@ namespace PFE_WPF
                     retour.VerticalAlignment = VerticalAlignment.Center;
                     retour.Text = pln.Object.seq + " / " + pln.Key;
 
-                    // Add columns
-                    ListView list = new ListView();
-                    var gridView = new GridView();
-                    list.View = gridView;
-                    gridView.Columns.Add(new GridViewColumn
-                    {
-                        Header = "camera",
-                        DisplayMemberBinding = new Binding("camera")
-                    });
-                    gridView.Columns.Add(new GridViewColumn
-                    {
-                        Header = "decor",
-                        DisplayMemberBinding = new Binding("decor")
-                    });
-                    gridView.Columns.Add(new GridViewColumn
-                    {
-                        Header = "cardSD",
-                        DisplayMemberBinding = new Binding("cardSD")
-                    });
+                    TextBox camera = new TextBox();
+                    camera.Text = pln.Object.camera;
 
-                    // Populate list
-                    //list.Items.Add(new Plan { cardSd = pln.Object.cardSd,camera = pln.Object.camera });
+                    TextBox cardSD = new TextBox();
+                    cardSD.Text = pln.Object.cardSd;
 
-                    List<Plan> items = new List<Plan>();
-                    items.Add(new Plan() { camera = pln.Object.camera, cardSd = pln.Object.cardSd ,decor = pln.Object.decor});
-                    list.ItemsSource = items;
+                    TextBox decor = new TextBox();
+                    decor.Text = pln.Object.decor;
 
-                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-                    view.SortDescriptions.Add(new SortDescription("camera", ListSortDirection.Ascending));
+                    TextBox date = new TextBox();
+                    date.Text = "20/05/2017";
 
-                    gridBack.Children.Add(list);
+                    TextBox description = new TextBox();
+                    description.Text = pln.Object.description;
+
+                    TextBox effetIN = new TextBox();
+                    effetIN.Text = pln.Object.effetIN;
+
+                    TextBox effetJN = new TextBox();
+                    effetJN.Text = pln.Object.effetJN;
+
+                    TextBox distance = new TextBox();
+                    distance.Text = pln.Object.distance;
+
+                    TextBox hauteur = new TextBox();
+                    hauteur.Text = pln.Object.hauteur;
+
+                    TextBox dialogue = new TextBox();
+                    dialogue.Text = pln.Object.dialogue;
+
+                    TextBox objectif = new TextBox();
+                    objectif.Text = pln.Object.objectif;
+
+                    TextBox sonOption = new TextBox();
+                    sonOption.Text = pln.Object.sonOption;
+
+                    StackPanel infoPlan = new StackPanel();
+                    infoPlan.Children.Add(camera);
+                    infoPlan.Children.Add(cardSD);
+                    infoPlan.Children.Add(decor);
+                    infoPlan.Children.Add(date);
+                    infoPlan.Children.Add(description);
+                    infoPlan.Children.Add(effetIN);
+                    infoPlan.Children.Add(effetJN);
+                    infoPlan.Children.Add(distance);
+                    infoPlan.Children.Add(hauteur);
+                    infoPlan.Children.Add(dialogue);
+                    infoPlan.Children.Add(objectif);
+                    infoPlan.Children.Add(sonOption);
+
+
                     GoBack.Content = iconBack;
                     details.Children.Add(GoBack);
                     details.Children.Add(retour);
@@ -337,6 +366,7 @@ namespace PFE_WPF
                     colorzoneBack.Content = details;
 
                     gridBack.Children.Add(colorzoneBack);
+                    gridBack.Children.Add(infoPlan);
 
                     stack.Children.Add(front);
 
