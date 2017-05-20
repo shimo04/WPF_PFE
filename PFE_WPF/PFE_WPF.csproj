@@ -118,7 +118,6 @@
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dinosaur.cs" />
     <Compile Include="Homie.xaml.cs">
       <DependentUpon>Homie.xaml</DependentUpon>
     </Compile>
