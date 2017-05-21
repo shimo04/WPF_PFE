@@ -58,7 +58,7 @@
         </materialDesign:PopupBox>
 
         <ScrollViewer  
-            Margin="0,72,0,0" VerticalScrollBarVisibility = "Auto">
+            Margin="0,72,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto">
             <Grid Name="gr">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

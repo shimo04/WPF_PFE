@@ -181,7 +181,7 @@ namespace PFE_WPF
                 var plans = await firebase.Child(id).Child("movies").Child(mt).Child("Sequence").Child(seq.Key).Child("plans").OrderByKey().OnceAsync<Plan>();
                 var nb = plans.Count();
                 var res = 0;
-                var r = (int)(nb / 2);
+                var r = (int)(nb / 3);
                 var x = 0;
                 while (x <= r + res)
                 {
@@ -193,14 +193,16 @@ namespace PFE_WPF
                 // Create Columns
                 ColumnDefinition gridCol1 = new ColumnDefinition();
                 ColumnDefinition gridCol2 = new ColumnDefinition();
+                ColumnDefinition gridCol3 = new ColumnDefinition();
                 gr.ColumnDefinitions.Add(gridCol1);
                 gr.ColumnDefinitions.Add(gridCol2);
+                gr.ColumnDefinitions.Add(gridCol3);
 
                 var i = 0;
                 var j = 0;
                 foreach (var pln in plans)
                 {
-                    if (i == 2)
+                    if (i == 3)
                     {
                         i = 0;
                         j++;
@@ -211,32 +213,15 @@ namespace PFE_WPF
                     /////////// front ///////////////////////
 
                     Grid gridFront = new Grid();
-                    gridFront.ShowGridLines = true;
-                    gridFront.Width = 390;
-                    gridFront.Height = 340;
+                    //gridFront.ShowGridLines = true;
+                    gridFront.Width = 250;
+                    gridFront.Height = 250;
 
                     // Create Rows  
                     RowDefinition row1Front = new RowDefinition();
-                    GridLengthConverter gridLengthConverterrow1 = new GridLengthConverter();
-                    row1Front.Height = (GridLength)gridLengthConverterrow1.ConvertFrom("*");
-                    RowDefinition row2Front = new RowDefinition();
-                    GridLengthConverter gridLengthConverterrow2 = new GridLengthConverter();
-                    row2Front.Height = (GridLength)gridLengthConverterrow2.ConvertFrom("*");
+                    row1Front.Height = new GridLength(250);
 
-                    gridFront.RowDefinitions.Add(row1Front);
-                    gridFront.RowDefinitions.Add(row2Front);
-
-
-                    // Create Columns
-                    ColumnDefinition colFront1 = new ColumnDefinition();
-                    colFront1.Width = new GridLength(120);
-                    ColumnDefinition colFront2 = new ColumnDefinition();
-                    GridLengthConverter gridLengthConvertercol = new GridLengthConverter();
-                    colFront2.Width = (GridLength)gridLengthConvertercol.ConvertFrom("Auto");
-                    
-
-                    gridFront.ColumnDefinitions.Add(colFront1);
-                    gridFront.ColumnDefinitions.Add(colFront2);
+                    gridFront.RowDefinitions.Add(row1Front);             
 
                     Flipper front = new Flipper();
                     front.Margin = new Thickness(4, 4, 0, 0);
@@ -244,14 +229,16 @@ namespace PFE_WPF
 
                     Image img = new Image();
                     img.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    img.VerticalAlignment = VerticalAlignment.Stretch;
                     img.Source = new BitmapImage(new Uri(pln.Object.urlImageLink));
+                    img.Width = 250;
+                    img.Height = 250;
 
                     //ColorZone colorzoneFront = new ColorZone();
                     //colorzoneFront.Mode = ColorZoneMode.PrimaryLight;
                     //colorzoneFront.VerticalAlignment = VerticalAlignment.Stretch;
 
                     //colorzoneFront.Content = img;
-
 
                     gridFront.Children.Add(img);
 
@@ -266,6 +253,7 @@ namespace PFE_WPF
                     more.Command = Flipper.FlipCommand;
                     more.Width = 70;
                     more.HorizontalAlignment = HorizontalAlignment.Center;
+                    more.VerticalAlignment = VerticalAlignment.Center;
                     more.Content = "More!";
                     ShadowAssist.SetShadowDepth(more, ShadowDepth.Depth5);
 
@@ -279,16 +267,14 @@ namespace PFE_WPF
                     SeqPlan.Children.Add(lb);
                     SeqPlan.Children.Add(more);
 
-
-                    Grid.SetColumn(SeqPlan, 0);
-                    Grid.SetRow(SeqPlan, 1);
+                    Grid.SetRow(SeqPlan, 0);
                     gridFront.Children.Add(SeqPlan);
-
 
                     ///////////////////////// back ///////////////////
                     Grid gridBack = new Grid();
-                    gridBack.Width = 400;
-                    gridBack.Height = 350;
+                    //gridBack.ShowGridLines = true;
+                    gridBack.Width = 250;
+                    gridBack.Height = 250;                   
 
                     // Create Rows  
                     RowDefinition row1Back = new RowDefinition();
@@ -296,16 +282,31 @@ namespace PFE_WPF
                     row1Back.Height = (GridLength)gridLengthConverter1B.ConvertFrom("Auto");
                     RowDefinition row2Back = new RowDefinition();
                     GridLengthConverter gridLengthConverter2B = new GridLengthConverter();
-                    row2Back.Height = (GridLength)gridLengthConverter2B.ConvertFrom("*");
+                    row2Back.Height = (GridLength)gridLengthConverter2B.ConvertFrom("Auto");
+                    RowDefinition row3Back = new RowDefinition();
+                    GridLengthConverter gridLengthConverter3B = new GridLengthConverter();
+                    row3Back.Height = (GridLength)gridLengthConverter3B.ConvertFrom("Auto");
+                    RowDefinition row4Back = new RowDefinition();
+                    GridLengthConverter gridLengthConverter4B = new GridLengthConverter();
+                    row4Back.Height = (GridLength)gridLengthConverter4B.ConvertFrom("Auto");
+                    RowDefinition row5Back = new RowDefinition();
+                    GridLengthConverter gridLengthConverter5B = new GridLengthConverter();
+                    row5Back.Height = (GridLength)gridLengthConverter5B.ConvertFrom("Auto");
+                    RowDefinition row6Back = new RowDefinition();
+                    GridLengthConverter gridLengthConverter6B = new GridLengthConverter();
+                    row6Back.Height = (GridLength)gridLengthConverter6B.ConvertFrom("Auto");
+                    RowDefinition row7Back = new RowDefinition();
+                    GridLengthConverter gridLengthConverter7B = new GridLengthConverter();
+                    row7Back.Height = (GridLength)gridLengthConverter7B.ConvertFrom("Auto");
 
                     gridBack.RowDefinitions.Add(row1Back);
                     gridBack.RowDefinitions.Add(row2Back);
+                    gridBack.RowDefinitions.Add(row3Back);
+                    gridBack.RowDefinitions.Add(row4Back);
+                    gridBack.RowDefinitions.Add(row5Back);
+                    gridBack.RowDefinitions.Add(row6Back);
+                    gridBack.RowDefinitions.Add(row7Back);
 
-                    // Create Columns
-                    ColumnDefinition colBack1 = new ColumnDefinition();
-                    ColumnDefinition colBack2 = new ColumnDefinition();
-                    gridBack.ColumnDefinitions.Add(colBack1);
-                    gridBack.ColumnDefinitions.Add(colBack2);
 
                     front.Padding = new Thickness(6);
                     front.BackContent = gridBack;
@@ -332,80 +333,146 @@ namespace PFE_WPF
                     retour.VerticalAlignment = VerticalAlignment.Center;
                     retour.Text = pln.Object.seq + " / " + pln.Key;
 
-                    TextBox camera = new TextBox();
-                    camera.Text = pln.Object.camera;
-
-                    TextBox cardSD = new TextBox();
-                    cardSD.Text = pln.Object.cardSd;
-
-                    TextBox decor = new TextBox();
-                    decor.Text = pln.Object.decor;
-
-                    TextBox date = new TextBox();
-                    date.Text = "20/05/2017";
-
-                    TextBox description = new TextBox();
-                    description.Text = pln.Object.description;
-
-                    TextBox effetIN = new TextBox();
-                    effetIN.Text = pln.Object.effetIN;
-
-                    TextBox effetJN = new TextBox();
-                    effetJN.Text = pln.Object.effetJN;
-
-                    TextBox distance = new TextBox();
-                    distance.Text = pln.Object.distance;
-
-                    TextBox hauteur = new TextBox();
-                    hauteur.Text = pln.Object.hauteur;
-
-                    TextBox dialogue = new TextBox();
-                    dialogue.Text = pln.Object.dialogue;
-
-                    TextBox objectif = new TextBox();
-                    objectif.Text = pln.Object.objectif;
-
-                    TextBox sonOption = new TextBox();
-                    sonOption.Text = pln.Object.sonOption;
-
-                    StackPanel infoPlan = new StackPanel();
-                    infoPlan.Children.Add(camera);
-                    infoPlan.Children.Add(cardSD);
-                    infoPlan.Children.Add(decor);
-                    infoPlan.Children.Add(date);
-                    infoPlan.Children.Add(description);
-                    infoPlan.Children.Add(effetIN);
-                    infoPlan.Children.Add(effetJN);
-                    infoPlan.Children.Add(distance);
-                    infoPlan.Children.Add(hauteur);
-                    infoPlan.Children.Add(dialogue);
-                    infoPlan.Children.Add(objectif);
-                    infoPlan.Children.Add(sonOption);
-
-
                     GoBack.Content = iconBack;
                     details.Children.Add(GoBack);
                     details.Children.Add(retour);
 
                     colorzoneBack.Content = details;
-
+                    Grid.SetColumnSpan(colorzoneBack, 2);
                     gridBack.Children.Add(colorzoneBack);
-                    gridBack.Children.Add(infoPlan);
+
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    Expander cameraExpander = new Expander();
+                    cameraExpander.Header = "Camera";
+                    cameraExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                    StackPanel cameraStack = new StackPanel();
+                    cameraStack.Orientation = Orientation.Vertical;
+                    TextBlock cameraTitre = new TextBlock();
+                    cameraTitre.Text = "camera";
+                    TextBlock camera = new TextBlock();
+                    camera.Text = pln.Object.camera;
+
+                    cameraStack.Children.Add(cameraTitre);
+                    cameraStack.Children.Add(camera);
+
+                    cameraExpander.Content = cameraStack;
+
+                    Grid.SetRow(cameraExpander, 1);
+                    gridBack.Children.Add(cameraExpander);
+                    //*****************************************************
+                    Expander cardSDExpander = new Expander();
+                    cardSDExpander.Header = "cardSD";
+                    cardSDExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                    StackPanel cardSDStack = new StackPanel();
+                    cardSDStack.Orientation = Orientation.Vertical;
+                    TextBlock cardSDTitre = new TextBlock();
+                    cardSDTitre.Text = "cardSD";
+                    TextBlock cardSD = new TextBlock();
+                    cardSD.Text = pln.Object.cardSd;
+
+                    cardSDStack.Children.Add(cardSDTitre);
+                    cardSDStack.Children.Add(cardSD);
+
+                    cardSDExpander.Content = cardSDStack;
+
+                    Grid.SetRow(cardSDExpander, 2);
+                    gridBack.Children.Add(cardSDExpander);
+                    //***********************************
+                    Expander decorExpander = new Expander();
+                    decorExpander.Header = "decor";
+                    decorExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                    StackPanel decorStack = new StackPanel();
+                    decorStack.Orientation = Orientation.Vertical;
+                    TextBlock decorTitre = new TextBlock();
+                    decorTitre.Text = "decor";
+                    TextBlock decor = new TextBlock();
+                    decor.Text = pln.Object.decor;
+
+                    decorStack.Children.Add(decorTitre);
+                    decorStack.Children.Add(decor);
+
+                    decorExpander.Content = decorStack;
+
+                    Grid.SetRow(decorExpander, 3);
+                    gridBack.Children.Add(decorExpander);
+                    //***********************
+                    Expander dateExpander = new Expander();
+                    dateExpander.Header = "date";
+                    dateExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                    StackPanel dateStack = new StackPanel();
+                    dateStack.Orientation = Orientation.Vertical;
+                    TextBlock dateTitre = new TextBlock();
+                    dateTitre.Text = "date";
+                    TextBlock date = new TextBlock();
+                    date.Text = "20/05/2017";
+
+                    dateStack.Children.Add(dateTitre);
+                    dateStack.Children.Add(date);
+
+                    dateExpander.Content = dateStack;
+
+                    Grid.SetRow(dateExpander, 4);
+                    gridBack.Children.Add(dateExpander);
+                    //************************************
+                    Expander descriptionExpander = new Expander();
+                    descriptionExpander.Header = "description";
+                    descriptionExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                    StackPanel descriptionStack = new StackPanel();
+                    descriptionStack.Orientation = Orientation.Vertical;
+                    TextBlock descriptionTitre = new TextBlock();
+                    descriptionTitre.Text = "description";
+                    TextBlock description = new TextBlock();
+                    description.Text = pln.Object.description;
+
+                    descriptionStack.Children.Add(descriptionTitre);
+                    descriptionStack.Children.Add(description);
+
+                    descriptionExpander.Content = descriptionStack;
+
+                    Grid.SetRow(descriptionExpander, 5);
+                    gridBack.Children.Add(descriptionExpander);
+                    //**********************************
+                    Expander dialogueExpander = new Expander();
+                    dialogueExpander.Header = "dialogue";
+                    dialogueExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
+
+                    StackPanel dialogueStack = new StackPanel();
+                    dialogueStack.Orientation = Orientation.Vertical;
+                    TextBlock dialogueTitre = new TextBlock();
+                    dialogueTitre.Text = "dialogue";
+                    TextBlock dialogue = new TextBlock();
+                    dialogue.Text = pln.Object.dialogue;
+
+                    dialogueStack.Children.Add(dialogueTitre);
+                    dialogueStack.Children.Add(dialogue);
+
+                    dialogueExpander.Content = dialogueStack;
+
+                    Grid.SetRow(dialogueExpander, 6);
+                    gridBack.Children.Add(dialogueExpander);
+                    //********************
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     stack.Children.Add(front);
 
-
                     gridFinal.Children.Add(stack);
+
+                    
 
                     Grid grdEspace = new Grid();
 
                     // Create Rows  
                     RowDefinition row1 = new RowDefinition();
-                    GridLengthConverter gridLengthConverter1 = new GridLengthConverter();
-                    row1.Height = (GridLength)gridLengthConverter1.ConvertFrom("*");
+                    GridLengthConverter gridLengthConvert1 = new GridLengthConverter();
+                    row1.Height = (GridLength)gridLengthConvert1.ConvertFrom("*");
                     RowDefinition row2 = new RowDefinition();
-                    GridLengthConverter gridLengthConverter2 = new GridLengthConverter();
-                    row2.Height = (GridLength)gridLengthConverter2.ConvertFrom("Auto");
+                    GridLengthConverter gridLengthConvert2 = new GridLengthConverter();
+                    row2.Height = (GridLength)gridLengthConvert2.ConvertFrom("Auto");
                     RowDefinition row3 = new RowDefinition();
                     GridLengthConverter gridLengthConverter3 = new GridLengthConverter();
                     row3.Height = (GridLength)gridLengthConverter3.ConvertFrom("Auto");
@@ -420,16 +487,16 @@ namespace PFE_WPF
                     t2.Text = "";
 
                     Card cd = new Card();
-                     
 
-                    //BrushConverter bc = new BrushConverter();
-                    //Brush brush = (Brush)bc.ConvertFrom("{DynamicResource PrimaryHueDarkBrush}");
-                   //brush.Freeze();
-                   // cd.Background = brush;
-                    cd.Height = 350;
-                    cd.Width = 400;
+                    //cd.Background = Brushes.Transparent;
+                    cd.Height = 250;
+                    cd.Width = 250;
                     ShadowAssist.SetShadowDepth(cd, ShadowDepth.Depth5);
                     cd.Content = gridFinal;
+
+                    ScrollViewer scrollPlan = new ScrollViewer();
+                    scrollPlan.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                    scrollPlan.Content =gridBack;
 
                     grdEspace.Children.Add(t2);
                     Grid.SetRow(cd, 1);
