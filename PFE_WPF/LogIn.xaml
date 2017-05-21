@@ -31,6 +31,7 @@
 
         <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="8" Height="475" Grid.ColumnSpan="4">
             <StackPanel>
+                <Image Source="Resources/Quinta.png" x:Name="image" Height="136" StretchDirection="DownOnly" Tag="" Cursor="None"/>
                 <TextBox Name="email" Margin="211,16,199,8" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Email"/>
                 <PasswordBox Name="password" Margin="211,4,199,0" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Mot de Passe" />
                 <Separator Style="{StaticResource MaterialDesignLightSeparator}" Margin="121,50,105,0"/>

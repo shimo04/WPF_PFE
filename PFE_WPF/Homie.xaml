@@ -51,11 +51,6 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="846,0,0,600" RenderTransformOrigin="12.294,1.512" Width="38">
-            <ListBox>
-                <ListBoxItem Content="Se deconnecter" Name="LogOut"/>
-            </ListBox>
-        </materialDesign:PopupBox>
 
         <ScrollViewer  
             Margin="0,72,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto">
@@ -67,9 +62,70 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-
-
             </Grid>
         </ScrollViewer>
+        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-58,592" Width="281" Height="62">
+            <CheckBox x:Name="PopupEnabled" Content="Enable Popup"/>
+            <materialDesign:PopupBox Margin="16,0,16,0" StaysOpen="True" IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
+                <Grid Width="300" Margin="8,8,8,8">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MaterialDesignCheckBox}">
+                            <Setter Property="Margin" Value="8,8,10,8"/>
+                        </Style>
+                        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+                            <Setter Property="materialDesign:HintAssist.IsFloating" Value="True"/>
+                            <Setter Property="Margin" Value="8,8,8,8"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignTitleTextBlock}" Margin="8,8,8,16"><Run Text="OPTIONS"/></TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Setting 1" Text="200"/>
+                    <TextBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Setting 2" Text="400"/>
+                    <TextBox Grid.Column="0" Grid.Row="3" materialDesign:HintAssist.Hint="Setting 3" Text="600"/>
+                    <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" />
+                    <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="True" VerticalAlignment="Bottom" />
+                    <CheckBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" />
+                    <ComboBox Grid.Column="0" Grid.Row="4" materialDesign:HintAssist.Hint="Setting 4" materialDesign:HintAssist.IsFloating="True"
+                        MaxDropDownHeight="200"
+                        Margin="8 8 8 8">
+                        <ComboBoxItem Content="25%"/>
+                        <ComboBoxItem Content="50%"/>
+                        <ComboBoxItem Content="75%"/>
+                        <ComboBoxItem Content="100%"/>
+                        <ComboBoxItem Content="150%"/>
+                        <ComboBoxItem Content="200%"/>
+                        <ComboBoxItem Content="250%"/>
+                        <ComboBoxItem Content="501%"/>
+                    </ComboBox>
+                </Grid>
+
+            </materialDesign:PopupBox>
+
+            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+                PlacementMode="BottomAndAlignCentres"                                                                      
+                                    
+                ToggleCheckedContentCommandParameter="wowsers"
+                Margin="0,3,48,10"
+                ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionAccentPopupBox" Height="Auto" Width="49">
+                <materialDesign:PopupBox.ToggleCheckedContent>
+                    <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" />
+                </materialDesign:PopupBox.ToggleCheckedContent>
+                <StackPanel>
+                    <Button ToolTip="One" Content="1"/>
+                    <Button ToolTip="Two" Content="2"/>
+                    <Button ToolTip="Three" Content="3"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </StackPanel>
     </Grid>
 </Window>

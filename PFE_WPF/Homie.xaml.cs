@@ -143,7 +143,7 @@ namespace PFE_WPF
                 grdEspace.RowDefinitions.Add(row2Front);
 
                 TextBlock t = new TextBlock();
-                t.Text = "";            
+                t.Text = "";
 
                 Card cd = new Card();
                 //cd.HorizontalAlignment = HorizontalAlignment.Left;
@@ -153,7 +153,7 @@ namespace PFE_WPF
                 cd.Content = g;
 
                 grdEspace.Children.Add(cd);
-                Grid.SetRow(t,1);
+                Grid.SetRow(t, 1);
                 grdEspace.Children.Add(t);
 
                 Grid.SetRow(grdEspace, j);
@@ -188,7 +188,7 @@ namespace PFE_WPF
 
                     gr.RowDefinitions.Add(new RowDefinition());
                     x++;
-                   
+
                 }
                 // Create Columns
                 ColumnDefinition gridCol1 = new ColumnDefinition();
@@ -215,13 +215,13 @@ namespace PFE_WPF
                     Grid gridFront = new Grid();
                     //gridFront.ShowGridLines = true;
                     gridFront.Width = 250;
-    
+
 
                     // Create Rows  
                     RowDefinition row1Front = new RowDefinition();
                     row1Front.Height = new GridLength(250);
 
-                    gridFront.RowDefinitions.Add(row1Front);             
+                    gridFront.RowDefinitions.Add(row1Front);
 
                     Flipper front = new Flipper();
                     front.Margin = new Thickness(4, 4, 0, 0);
@@ -261,7 +261,7 @@ namespace PFE_WPF
                     titre.Content = " Seq " + pln.Object.seq + " / Pln " + pln.Key;
                     titre.HorizontalAlignment = HorizontalAlignment.Center;
                     Label lb = new Label();
-                    
+
                     SeqPlan.Children.Add(titre);
                     SeqPlan.Children.Add(lb);
                     SeqPlan.Children.Add(more);
@@ -330,7 +330,7 @@ namespace PFE_WPF
                     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     Expander cameraExpander = new Expander();
                     cameraExpander.Header = "Camera";
-                    cameraExpander.HorizontalAlignment = HorizontalAlignment.Stretch;                   
+                    cameraExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
                     TextBlock camera = new TextBlock();
                     camera.Text = pln.Object.camera;
                     cameraExpander.Content = camera;
@@ -422,7 +422,7 @@ namespace PFE_WPF
                     hauteurExpander.Header = "hauteur";
                     hauteurExpander.HorizontalAlignment = HorizontalAlignment.Stretch;
                     TextBlock hauteur = new TextBlock();
-                    hauteur.Text = pln.Object.hauteur;             
+                    hauteur.Text = pln.Object.hauteur;
                     hauteurExpander.Content = hauteur;
 
                     Grid.SetRow(hauteurExpander, 10);
@@ -475,7 +475,7 @@ namespace PFE_WPF
 
                     gridFinal.Children.Add(stack);
 
-                    
+
 
                     Grid grdEspace = new Grid();
 
