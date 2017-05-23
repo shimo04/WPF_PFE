@@ -65,7 +65,7 @@
             </Grid>
         </ScrollViewer>
         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-58,592" Width="281" Height="62">
-            <CheckBox x:Name="PopupEnabled" Content="Enable Popup"/>
+            <CheckBox x:Name="PopupEnabled" Content="Chose Type" />
             <materialDesign:PopupBox Margin="16,0,16,0" StaysOpen="True" IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
                 <Grid Width="300" Margin="8,8,8,8">
                     <Grid.Resources>
