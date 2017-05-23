@@ -29,7 +29,9 @@
             <DockPanel>
                 <StackPanel Orientation="Horizontal"
                             materialDesign:RippleAssist.IsCentered="True">
-                    <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                    <Button Click="Window_Loaded" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Acceuil" materialDesign:ShadowAssist.ShadowDepth="Depth5">
+                        <materialDesign:PackIcon Kind="Home" BorderBrush="Black" />
+                    </Button>
                     <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
                                    Margin="16 0 0 0"
                                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
@@ -46,10 +48,16 @@
                                      materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                                      MinWidth="200" VerticalAlignment="Center" />
                         </Grid>
+
                     </materialDesign:ColorZone>
+
                     <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0"/>
+                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Se déconneter" materialDesign:ShadowAssist.ShadowDepth="Depth5">
+                        <materialDesign:PackIcon Kind="Logout" BorderBrush="Black" />
+                    </Button>
                 </StackPanel>
             </DockPanel>
+
         </materialDesign:ColorZone>
 
         <ScrollViewer  
@@ -64,7 +72,7 @@
 
             </Grid>
         </ScrollViewer>
-        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-58,592" Width="281" Height="62">
+        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-138,596" Width="281" Height="62">
             <CheckBox x:Name="PopupEnabled" Content="Chose Type" />
             <materialDesign:PopupBox Margin="16,0,16,0" StaysOpen="True" IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
                 <Grid Width="300" Margin="8,8,8,8">
@@ -110,22 +118,9 @@
                 </Grid>
 
             </materialDesign:PopupBox>
-
-            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
-                PlacementMode="BottomAndAlignCentres"                                                                      
-                                    
-                ToggleCheckedContentCommandParameter="wowsers"
-                Margin="0,3,48,10"
-                ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionAccentPopupBox" Height="Auto" Width="49">
-                <materialDesign:PopupBox.ToggleCheckedContent>
-                    <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" />
-                </materialDesign:PopupBox.ToggleCheckedContent>
-                <StackPanel>
-                    <Button ToolTip="One" Content="1"/>
-                    <Button ToolTip="Two" Content="2"/>
-                    <Button ToolTip="Three" Content="3"/>
-                </StackPanel>
-            </materialDesign:PopupBox>
         </StackPanel>
+
+
+
     </Grid>
 </Window>

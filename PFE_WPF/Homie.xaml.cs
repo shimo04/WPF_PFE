@@ -39,6 +39,8 @@ namespace PFE_WPF
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            gr.Children.Clear();
+            gr.RowDefinitions.Clear();
             var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
             var movies = await firebase.Child(id).Child("movies").OrderByKey().OnceAsync<Movies>();
             var nb = movies.Count();
