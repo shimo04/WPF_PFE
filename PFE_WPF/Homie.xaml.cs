@@ -37,8 +37,16 @@ namespace PFE_WPF
             this.id = cle;
         }
 
+        private void LogOut_Button(object sender, RoutedEventArgs e)
+        {
+            var LogIn = new LogIn();
+            LogIn.Show();
+            this.Close();
+        }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            logOut.Click += (Object, RoutedEventArgs) => { LogOut_Button(sender, e); };
+            lookForV.Visibility = Visibility.Hidden;
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
             var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
@@ -185,6 +193,7 @@ namespace PFE_WPF
         }
         private async void Movie_Click(object sender, RoutedEventArgs e, String mt)
         {
+            lookForV.Visibility = Visibility.Visible;
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
             //gr.ColumnDefinitions.Clear();

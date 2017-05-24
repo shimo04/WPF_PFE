@@ -52,7 +52,7 @@
                     </materialDesign:ColorZone>
 
                     <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0"/>
-                    <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Se déconneter" materialDesign:ShadowAssist.ShadowDepth="Depth5">
+                    <Button Name="logOut" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Se déconneter" materialDesign:ShadowAssist.ShadowDepth="Depth5">
                         <materialDesign:PackIcon Kind="Logout" BorderBrush="Black" />
                     </Button>
                 </StackPanel>
@@ -72,7 +72,7 @@
 
             </Grid>
         </ScrollViewer>
-        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-138,596" Width="281" Height="62">
+        <StackPanel Name="lookForV" Visibility="Hidden" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-138,596" Width="281" Height="62">
             <CheckBox x:Name="PopupEnabled" Content="Chose Type" />
             <materialDesign:PopupBox Margin="16,0,16,0" StaysOpen="True" IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
                 <Grid Width="300" Margin="8,8,8,8">
