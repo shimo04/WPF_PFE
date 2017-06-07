@@ -1,0 +1,47 @@
+﻿<Window x:Class="PFE_WPF.LookForVideo"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PFE_WPF"
+        mc:Ignorable="d"
+        Title="Recherche Prises" Height="300" Width="300"
+        WindowStyle="ToolWindow" ResizeMode="NoResize"
+          WindowStartupLocation="Manual" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <materialDesign:ColorZone Mode="Dark" Padding="16" Height="73">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="195*"/>
+                    <ColumnDefinition Width="67*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Qualité :" Margin="-10,-10,10,10"></Label>
+                <Button x:Name="valider" Content="importer" Height="Auto" Margin="-8,24,126,-7" Click="valider_Click"/>
+                <materialDesign:RatingBar x:Name="cha" Value="3" Max="3" Margin="44,-9,74,23"></materialDesign:RatingBar>
+            </Grid>
+        </materialDesign:ColorZone>
+        <ScrollViewer  
+            Margin="0,73,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto">
+            <Grid>
+
+            </Grid>
+
+        </ScrollViewer>
+    </Grid>
+</Window>

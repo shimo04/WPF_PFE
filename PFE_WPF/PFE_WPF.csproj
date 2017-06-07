@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CopyFiles">
+      <HintPath>..\..\..\..\Desktop\CopyFile and change progress bar\CopyFiles.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Auth, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FirebaseAuthentication.net.3.0.4\lib\netstandard1.1\Firebase.Auth.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +83,7 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -112,9 +116,14 @@
     </Compile>
     <Compile Include="Date.cs" />
     <Compile Include="ListPrises.cs" />
+    <Compile Include="LookForVideo.xaml.cs">
+      <DependentUpon>LookForVideo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plan.cs" />
+    <Compile Include="PlanInfo.xaml.cs">
+      <DependentUpon>PlanInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Prise.cs" />
-    <Compile Include="Sequence.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +169,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LogIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LookForVideo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlanInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

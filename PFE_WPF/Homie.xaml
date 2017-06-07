@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PFE_WPF"
         mc:Ignorable="d"
-        Title="Home" Height="700" Width="900" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="Recherche Informaions" Height="700" Width="900" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded" Top="10" Left="2">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -29,9 +29,9 @@
             <DockPanel>
                 <StackPanel Orientation="Horizontal"
                             materialDesign:RippleAssist.IsCentered="True">
-                    <Button Click="Window_Loaded" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Acceuil" materialDesign:ShadowAssist.ShadowDepth="Depth5">
-                        <materialDesign:PackIcon Kind="Home" BorderBrush="Black" />
-                    </Button>
+                    <StackPanel Name="headerStack" Orientation="Horizontal"
+                            materialDesign:RippleAssist.IsCentered="True">
+                    </StackPanel>
                     <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
                                    Margin="16 0 0 0"
                                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
@@ -44,16 +44,15 @@
                             <Button Style="{DynamicResource MaterialDesignToolButton}">
                                 <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
                             </Button>
-                            <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Chercher" 
+                            <TextBox  Name="recherche" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Chercher" 
                                      materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-                                     MinWidth="200" VerticalAlignment="Center" />
+                                     MinWidth="200" VerticalAlignment="Center" TextChanged="recherche_TextChanged" />
                         </Grid>
 
                     </materialDesign:ColorZone>
-
                     <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="8 0 0 0" Panel.ZIndex="0"/>
-                    <Button Name="logOut" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Se déconneter" materialDesign:ShadowAssist.ShadowDepth="Depth5">
-                        <materialDesign:PackIcon Kind="Logout" BorderBrush="Black" />
+                    <Button  Name="lookForV" Style="{StaticResource MaterialDesignRaisedAccentButton}" ToolTip="Chercher des prises" Click=" Load_Recherche" materialDesign:ShadowAssist.ShadowDepth="Depth5" Height="31" Width="46">
+                        <materialDesign:PackIcon Kind="Video" BorderBrush="Black" Height="22" Width="16" />
                     </Button>
                 </StackPanel>
             </DockPanel>
@@ -72,55 +71,8 @@
 
             </Grid>
         </ScrollViewer>
-        <StackPanel Name="lookForV" Visibility="Hidden" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-138,596" Width="281" Height="62">
-            <CheckBox x:Name="PopupEnabled" Content="Chose Type" />
-            <materialDesign:PopupBox Margin="16,0,16,0" StaysOpen="True" IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
-                <Grid Width="300" Margin="8,8,8,8">
-                    <Grid.Resources>
-                        <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MaterialDesignCheckBox}">
-                            <Setter Property="Margin" Value="8,8,10,8"/>
-                        </Style>
-                        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
-                            <Setter Property="materialDesign:HintAssist.IsFloating" Value="True"/>
-                            <Setter Property="Margin" Value="8,8,8,8"/>
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignTitleTextBlock}" Margin="8,8,8,16"><Run Text="OPTIONS"/></TextBlock>
-                    <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Setting 1" Text="200"/>
-                    <TextBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Setting 2" Text="400"/>
-                    <TextBox Grid.Column="0" Grid.Row="3" materialDesign:HintAssist.Hint="Setting 3" Text="600"/>
-                    <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" />
-                    <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="True" VerticalAlignment="Bottom" />
-                    <CheckBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" />
-                    <ComboBox Grid.Column="0" Grid.Row="4" materialDesign:HintAssist.Hint="Setting 4" materialDesign:HintAssist.IsFloating="True"
-                        MaxDropDownHeight="200"
-                        Margin="8 8 8 8">
-                        <ComboBoxItem Content="25%"/>
-                        <ComboBoxItem Content="50%"/>
-                        <ComboBoxItem Content="75%"/>
-                        <ComboBoxItem Content="100%"/>
-                        <ComboBoxItem Content="150%"/>
-                        <ComboBoxItem Content="200%"/>
-                        <ComboBoxItem Content="250%"/>
-                        <ComboBoxItem Content="501%"/>
-                    </ComboBox>
-                </Grid>
-
-            </materialDesign:PopupBox>
-        </StackPanel>
-
-
-
+        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="845,4,0,601" RenderTransformOrigin="2.944,0.207">
+            <Button Content="Se déconnecter" Click="LogOut_Button"/>
+        </materialDesign:PopupBox>
     </Grid>
 </Window>

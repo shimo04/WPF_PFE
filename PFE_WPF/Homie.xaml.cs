@@ -21,12 +21,13 @@ using System.Windows.Controls.Primitives;
 
 namespace PFE_WPF
 {
-    /// <summary>
-    /// Interaction logic for Homie.xaml
-    /// </summary>
+    /// we code for FUN
+
     public partial class Homie : Window
     {
         public String id;
+        public String movieTile;
+        public String sequenceMovie;
         public Homie()
         {
         }
@@ -43,9 +44,207 @@ namespace PFE_WPF
             LogIn.Show();
             this.Close();
         }
+        public void Saisie_Grid(object sender, RoutedEventArgs e, Grid g)
+        {
+            gr.Children.Clear();
+            gr.RowDefinitions.Clear();
+
+            // Create Rows  
+            RowDefinition r1 = new RowDefinition();
+            r1.Height = new GridLength(145);
+            RowDefinition r2 = new RowDefinition();
+            GridLengthConverter gridLengthConverter1 = new GridLengthConverter();
+            r2.Height = (GridLength)gridLengthConverter1.ConvertFrom("*");
+            RowDefinition r3 = new RowDefinition();
+            GridLengthConverter gridLengthConverter2 = new GridLengthConverter();
+            r3.Height = (GridLength)gridLengthConverter2.ConvertFrom("Auto");
+
+            g.RowDefinitions.Add(r1);
+            g.RowDefinitions.Add(r2);
+            g.RowDefinitions.Add(r3);
+        }
+        public void Saisie_Image(object sender, RoutedEventArgs e, Image img, int height, String source)
+        {
+            img.Height = height;
+            img.Source = new BitmapImage(new Uri(source));
+        }
+        public void Saisie_Icon(object sender, RoutedEventArgs e, Image img, int height, String source)
+        {
+
+        }
+        private async void recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
+            var movies = await firebase.Child(id).Child("movies").OrderByKey().OnceAsync<Movies>();
+            foreach (var movie in movies)
+            {
+                if (recherche.Text == movie.Object.Titre)
+                {
+                    Grid g = new Grid();
+                    Saisie_Grid(sender, e,g);
+
+                    Image img = new Image();
+                    img.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    Saisie_Image(sender, e, img, 140, "C:\\Users\\lUnA ShImO\\Documents\\Visual Studio 2015\\Projects\\PFE_WPF\\PFE_WPF\\Resources\\Chartridge046_small.jpg");
+                    g.Children.Add(img);
+
+                    PackIcon ic = new PackIcon();
+                    ic.Width = 20;
+                    ic.Height = 20;
+                    ic.Kind = PackIconKind.Camera;
+                    ic.HorizontalAlignment = HorizontalAlignment.Right;
+                    ic.VerticalAlignment = VerticalAlignment.Bottom;
+
+                    Grid.SetRow(ic, 0);
+                    g.Children.Add(ic);
+
+                    StackPanel stackT = new StackPanel { };
+                    stackT.Orientation = Orientation.Vertical;
+                    Chip titre = new Chip();
+                    titre.HorizontalAlignment = HorizontalAlignment.Center;
+                    titre.FontWeight = FontWeights.Bold;
+                    titre.Content = movie.Key;
+                    titre.IconBackground = Brushes.Yellow;
+                    TextBlock prod = new TextBlock();
+                    prod.FontWeight = FontWeights.Bold;
+                    prod.Text = $"Production : { movie.Object.Production}";
+                    prod.TextAlignment = TextAlignment.Center;
+                    TextBlock real = new TextBlock();
+                    real.FontWeight = FontWeights.Bold;
+                    real.Text = $"Realisateur : { movie.Object.Realisateur}";
+                    real.TextAlignment = TextAlignment.Center;
+
+                    stackT.Children.Add(titre);
+                    stackT.Children.Add(prod);
+                    stackT.Children.Add(real);
+
+                    Grid.SetRow(stackT, 1);
+                    g.Children.Add(stackT);
+
+                    var sequences = await firebase.Child(id).Child("movies").Child(movie.Key).Child("Sequence").OrderByKey().OnceAsync<Movies>();
+                    var nbSeq = sequences.Count().ToString();
+
+                    StackPanel stackP = new StackPanel { };
+                    stackP.HorizontalAlignment = HorizontalAlignment.Right;
+                    stackP.Margin = new Thickness(8);
+                    stackP.Orientation = Orientation.Horizontal;
+                    PackIcon pop = new PackIcon();
+                    Style myStyle = (Style)Resources["{StaticResource MaterialDesignToolPopupBox}"];
+                    pop.Style = myStyle;
+                    pop.Kind = PackIconKind.Movie;
+                    pop.Padding = new Thickness(2, 0, 2, 0);
+                    Button more = new Button();
+                    more.Width = 50;
+                    more.Content = pop;
+                    var mv = movie.Key;
+                    more.Click += (Object, RoutedEventArgs) => { Movie_Click(sender, e, mv); };
+
+                    Badged moreBg = new Badged();
+                    moreBg.Badge = nbSeq;
+                    moreBg.Content = more;
+
+                    stackP.Children.Add(moreBg);
+                    Grid.SetRow(stackP, 2);
+                    g.Children.Add(stackP);
+
+                    Grid grdEspace = new Grid();
+
+                    // Create Rows  
+                    RowDefinition row1 = new RowDefinition();
+                    GridLengthConverter gridLengthConverterrow1 = new GridLengthConverter();
+                    row1.Height = (GridLength)gridLengthConverterrow1.ConvertFrom("*");
+                    RowDefinition row2 = new RowDefinition();
+                    GridLengthConverter gridLengthConverterrow2 = new GridLengthConverter();
+                    row2.Height = (GridLength)gridLengthConverterrow2.ConvertFrom("Auto");
+
+                    grdEspace.RowDefinitions.Add(row1);
+                    grdEspace.RowDefinitions.Add(row2);
+
+                    TextBlock vide = new TextBlock();
+
+                    Card cd = new Card();
+                    //cd.HorizontalAlignment = HorizontalAlignment.Left;
+                    ShadowAssist.SetShadowDepth(cd, ShadowDepth.Depth5);
+                    cd.Height = 270;
+                    cd.Width = 200;
+                    cd.Content = g;
+                    gr.Children.Add(cd);
+                }
+            }
+        }
+        private void Load_Recherche(object sender, RoutedEventArgs e)
+        {
+            var LookForVideo = new LookForVideo(id, movieTile);
+            LookForVideo.Left = 890;
+            LookForVideo.Top = 10;
+            LookForVideo.Width = 480;
+            LookForVideo.Height = 700;
+            LookForVideo.Show();
+        }
+
+        private void Previous_Button(object sender, RoutedEventArgs e, String nomMethod)
+        {
+            Button prev = new Button();
+            Color color = (Color)ColorConverter.ConvertFromString("#FFAEEA00");
+            prev.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
+            ShadowAssist.SetShadowDepth(prev, ShadowDepth.Depth5);
+            if (nomMethod == "Window_Loaded") 
+            {
+                PackIcon prevIcon = new PackIcon();
+                prevIcon.Kind = PackIconKind.ArrowLeftBold;
+                prevIcon.Background = Brushes.Black;
+                prev.Content = prevIcon;
+                headerStack.Children.Add(prev);
+                prev.Click += (Object, RoutedEventArgs) => { Window_Loaded(sender, e); };
+            }
+            else if (nomMethod == "Movie_Click") 
+            {
+                Button home = new Button();
+                home.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
+                ShadowAssist.SetShadowDepth(home, ShadowDepth.Depth5);
+                PackIcon homeIcon = new PackIcon();
+                homeIcon.Kind = PackIconKind.Home;
+                homeIcon.Background = Brushes.Black;
+                home.Content = homeIcon;
+                home.Click += (Object, RoutedEventArgs) => { Window_Loaded(sender, e); };
+
+                PackIcon prevIcon = new PackIcon();
+                prevIcon.Kind = PackIconKind.ArrowLeftBold;
+                prevIcon.Background = Brushes.Black;
+                prev.Content = prevIcon;
+                Label espace = new Label();
+                headerStack.Children.Add(home);
+                headerStack.Children.Add(espace);
+                headerStack.Children.Add(prev);
+                prev.Click += (Object, RoutedEventArgs) => { Movie_Click(sender, e, movieTile); };
+            }
+            else if (nomMethod == "Plan_Prises_Click")
+            {
+                Button home = new Button();
+                home.Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B));
+                ShadowAssist.SetShadowDepth(home, ShadowDepth.Depth5);
+                PackIcon homeIcon = new PackIcon();
+                homeIcon.Kind = PackIconKind.Home;
+                homeIcon.Background = Brushes.Black;
+                home.Content = homeIcon;
+                home.Click += (Object, RoutedEventArgs) => { Window_Loaded(sender, e); };
+
+                PackIcon prevIcon = new PackIcon();
+                prevIcon.Kind = PackIconKind.ArrowLeftBold;
+                prevIcon.Background = Brushes.Black;
+                prev.Content = prevIcon;
+                Label espace = new Label();
+                headerStack.Children.Add(home);
+                headerStack.Children.Add(espace);
+                headerStack.Children.Add(prev);
+                prev.Click += (Object, RoutedEventArgs) => { Sequence_Click(sender, e, movieTile,sequenceMovie); };
+            }
+        }
+        
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logOut.Click += (Object, RoutedEventArgs) => { LogOut_Button(sender, e); };
+            recherche.Text = "";
+            headerStack.Children.Clear();
             lookForV.Visibility = Visibility.Hidden;
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
@@ -147,8 +346,8 @@ namespace PFE_WPF
                 Button more = new Button();
                 more.Width = 50;
                 more.Content = pop;
-                var mT = movie.Key;
-                more.Click += (Object, RoutedEventArgs) => { Movie_Click(sender, e, mT); };
+                var mv = movie.Key;
+                more.Click += (Object, RoutedEventArgs) => { Movie_Click(sender, e, mv); };                
 
                 Badged moreBg = new Badged();
                 moreBg.Badge = nbSeq;
@@ -191,15 +390,18 @@ namespace PFE_WPF
                 i++;
             }
         }
-        private async void Movie_Click(object sender, RoutedEventArgs e, String mt)
+        private async void Movie_Click(Object sender, RoutedEventArgs e, String mv)
         {
+            movieTile = mv;
+            headerStack.Children.Clear();
+            Previous_Button(sender, e,"Window_Loaded");
             lookForV.Visibility = Visibility.Visible;
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
             //gr.ColumnDefinitions.Clear();
 
             var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
-            var sequences = await firebase.Child(id).Child("movies").Child(mt).Child("Sequence").OrderByKey().OnceAsync<Movies>();
+            var sequences = await firebase.Child(id).Child("movies").Child(mv).Child("Sequence").OrderByKey().OnceAsync<Movies>();
             var nbS = sequences.Count();
             var res = 0;
             if (nbS % 4 != 0)
@@ -267,7 +469,7 @@ namespace PFE_WPF
                 Grid.SetRow(stackT, 1);
                 g.Children.Add(stackT);
 
-                var plans = await firebase.Child(id).Child("movies").Child(mt).Child("Sequence").Child(seq.Key).Child("plans").OrderByKey().OnceAsync<Plan>();
+                var plans = await firebase.Child(id).Child("movies").Child(mv).Child("Sequence").Child(seq.Key).Child("plans").OrderByKey().OnceAsync<Plan>();
                 var nbPlans = plans.Count().ToString();
 
                 StackPanel stackP = new StackPanel { };
@@ -283,8 +485,8 @@ namespace PFE_WPF
                 var bc = new BrushConverter();
                 more.Background = (Brush)bc.ConvertFrom("#FF5D9EA6");
                 more.Content = pop;
-                var sequi = seq.Key;
-                more.Click += (Object, RoutedEventArgs) => { Sequence_Click(sender, e, mt, sequi); };
+                var sequi = seq.Key;               
+                more.Click += (Object, RoutedEventArgs) => { Sequence_Click(sender, e, mv, sequi); };
 
                 Badged moreBg = new Badged();
                 moreBg.Badge = nbPlans;
@@ -329,6 +531,9 @@ namespace PFE_WPF
         }
         private async void Sequence_Click(object sender, RoutedEventArgs e, String mt, String sequi)
         {
+            sequenceMovie = sequi;
+            headerStack.Children.Clear();
+            Previous_Button(sender, e, "Movie_Click");
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
             //gr.ColumnDefinitions.Clear();
@@ -424,6 +629,7 @@ namespace PFE_WPF
                 info.Content = infoIcon;
                 ShadowAssist.SetShadowDepth(info, ShadowDepth.Depth5);
 
+                var plann = plan.Object.plan;
                 var camera = plan.Object.camera;
                 var cardSD = plan.Object.camera;
                 var decor = plan.Object.camera;
@@ -433,7 +639,7 @@ namespace PFE_WPF
                 var objectif = plan.Object.camera;
                 var sonOption = plan.Object.camera;
                 var distance = plan.Object.camera;
-                info.Click += (Object, RoutedEventArgs) => { Plan_Info_Click(more, e, mt, sequi, camera, cardSD, decor, effetIN, effetJN, hauteur, objectif, sonOption, distance); };
+                info.Click += (Object, RoutedEventArgs) => { Plan_Info_Click(more, e, mt, sequi, camera, cardSD, decor, effetIN, effetJN, hauteur, objectif, sonOption, distance,plann); };
 
                 Label lb1 = new Label();
                 Label lb2 = new Label();
@@ -487,120 +693,19 @@ namespace PFE_WPF
                 i++;
             }
         }
-        private void Plan_Info_Click(object sender, RoutedEventArgs e, String mt, String sequi, String camera, String cardSD, String decor, String effetIN, String effetJN, String hauteur, String objectif, String sonOption, String distance)
+        private void Plan_Info_Click(object sender, RoutedEventArgs e, String mt, String sequi, String camera, String cardSD, String decor, String effetIN, String effetJN, String hauteur, String objectif, String sonOption, String distance,String plann)
         {
-            Grid gridInfo = new Grid();
-            var cp = 0;
-            while (cp <= 9)
-            {
-
-                gridInfo.RowDefinitions.Add(new RowDefinition());
-                cp++;
-            }
-
-
-
-            Chip cameraChip = new Chip();
-            cameraChip.Width = 200;
-            cameraChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            cameraChip.VerticalAlignment = VerticalAlignment.Center;
-            cameraChip.HorizontalAlignment = HorizontalAlignment.Center;
-            cameraChip.Content = "camera : " + camera;
-            gridInfo.Children.Add(cameraChip);
-
-            Chip cardSDChip = new Chip();
-            cardSDChip.Width = 200;
-            cardSDChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            cardSDChip.VerticalAlignment = VerticalAlignment.Center;
-            cardSDChip.HorizontalAlignment = HorizontalAlignment.Center;
-            cardSDChip.Content = "cardSD : " + cardSD;
-            Grid.SetRow(cardSDChip, 1);
-            gridInfo.Children.Add(cardSDChip);
-
-            Chip decorChip = new Chip();
-            decorChip.Width = 200;
-            decorChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            decorChip.VerticalAlignment = VerticalAlignment.Center;
-            decorChip.HorizontalAlignment = HorizontalAlignment.Center;
-            decorChip.Content = "decor : " + decor;
-            Grid.SetRow(decorChip, 2);
-            gridInfo.Children.Add(decorChip);
-
-            Chip effetINChip = new Chip();
-            effetINChip.Width = 200;
-            effetINChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            effetINChip.VerticalAlignment = VerticalAlignment.Center;
-            effetINChip.HorizontalAlignment = HorizontalAlignment.Center;
-            effetINChip.Content = "effetIN : " + effetIN;
-            Grid.SetRow(effetINChip, 3);
-            gridInfo.Children.Add(effetINChip);
-
-            Chip effetJNChip = new Chip();
-            effetJNChip.Width = 200;
-            effetJNChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            effetJNChip.VerticalAlignment = VerticalAlignment.Center;
-            effetJNChip.HorizontalAlignment = HorizontalAlignment.Center;
-            effetJNChip.Content = "effetJN : " + effetJN;
-            Grid.SetRow(effetJNChip, 4);
-            gridInfo.Children.Add(effetJNChip);
-
-            Chip hauteurChip = new Chip();
-            hauteurChip.Width = 200;
-            hauteurChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            hauteurChip.VerticalAlignment = VerticalAlignment.Center;
-            hauteurChip.HorizontalAlignment = HorizontalAlignment.Center;
-            hauteurChip.Content = "hauteur : " + hauteur;
-            Grid.SetRow(hauteurChip, 5);
-            gridInfo.Children.Add(hauteurChip);
-
-            Chip objectifChip = new Chip();
-            objectifChip.Width = 200;
-            objectifChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            objectifChip.VerticalAlignment = VerticalAlignment.Center;
-            objectifChip.HorizontalAlignment = HorizontalAlignment.Center;
-            objectifChip.Content = "objectif : " + objectif;
-            Grid.SetRow(objectifChip, 6);
-            gridInfo.Children.Add(objectifChip);
-
-            Chip sonOptionChip = new Chip();
-            sonOptionChip.Width = 200;
-            sonOptionChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            sonOptionChip.VerticalAlignment = VerticalAlignment.Center;
-            sonOptionChip.HorizontalAlignment = HorizontalAlignment.Center;
-            sonOptionChip.Content = "sonOption : " + sonOption;
-            Grid.SetRow(sonOptionChip, 7);
-            gridInfo.Children.Add(sonOptionChip);
-
-            Chip distanceChip = new Chip();
-            distanceChip.Width = 200;
-            distanceChip.HorizontalContentAlignment = HorizontalAlignment.Center;
-            distanceChip.VerticalAlignment = VerticalAlignment.Center;
-            distanceChip.HorizontalAlignment = HorizontalAlignment.Center;
-            distanceChip.Content = "distance : " + distance;
-            Grid.SetRow(distanceChip, 8);
-            gridInfo.Children.Add(distanceChip);
-
-
-            ScrollViewer scrollPlan = new ScrollViewer();
-            scrollPlan.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            scrollPlan.Height = 260;
-
-
-            Card cd = new Card();
-
-            ShadowAssist.SetShadowDepth(cd, ShadowDepth.Depth5);
-            cd.Height = 260;
-            cd.Width = 200;
-            cd.Content = gridInfo;
-            scrollPlan.Content = cd;
-            Popup exp = new Popup();
-            exp.Placement = System.Windows.Controls.Primitives.PlacementMode.Mouse;
-            exp.StaysOpen = false;
-            exp.IsOpen = true;
-            exp.Child = scrollPlan;
+            var PlanInfo = new PlanInfo();
+            PlanInfo.Left = 890;
+            PlanInfo.Top = 10;
+            PlanInfo.Width = 480;
+            PlanInfo.Height = 700;
+            PlanInfo.Show();
         }
         private async void Plan_Prises_Click(object sender, RoutedEventArgs e, String mt, String sequi, String pln)
         {
+            headerStack.Children.Clear();
+            Previous_Button(sender, e, "Plan_Prises_Click");
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
             //gr.ColumnDefinitions.Clear();
@@ -656,10 +761,22 @@ namespace PFE_WPF
 
                 Chip note = new Chip();
                 note.Width = 200;
+
                 RatingBar noteRt = new RatingBar();
                 noteRt.HorizontalAlignment = HorizontalAlignment.Center;
-                noteRt.Max = 6;
-                noteRt.Value = Int32.Parse(prise.Object.note);
+                noteRt.Max = 3;
+                if (prise.Object.note == "exellente")
+                {
+                    noteRt.Value = 3;
+                }
+                else if (prise.Object.note == "moyenne")
+                {
+                    noteRt.Value = 2;
+                }
+                else
+                {
+                    noteRt.Value = 1;
+                }
                 note.Content = noteRt;
 
                 Grid.SetRow(note, 1);
