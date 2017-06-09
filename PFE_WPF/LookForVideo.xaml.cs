@@ -73,7 +73,8 @@ namespace PFE_WPF
                 }                    
            }
 
-            MessageBox.Show(mv);
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
 
         }
     }

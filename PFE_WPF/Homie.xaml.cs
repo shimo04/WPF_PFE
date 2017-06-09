@@ -67,6 +67,7 @@ namespace PFE_WPF
         {
             img.Height = height;
             img.Source = new BitmapImage(new Uri(source));
+            img.Stretch = Stretch.Fill;
         }
         public void Saisie_Icon(object sender, RoutedEventArgs e, Image img, int height, String source)
         {
@@ -294,6 +295,7 @@ namespace PFE_WPF
                 Image img = new Image();
                 img.Height = 140;
                 img.HorizontalAlignment = HorizontalAlignment.Stretch;
+                img.Stretch = Stretch.Fill;
                 img.Source = new BitmapImage(new Uri("C:\\Users\\lUnA ShImO\\Documents\\Visual Studio 2015\\Projects\\PFE_WPF\\PFE_WPF\\Resources\\Chartridge046_small.jpg"));
                 g.Children.Add(img);
 
@@ -584,6 +586,7 @@ namespace PFE_WPF
                 Image img = new Image();
                 img.Height = 140;
                 img.HorizontalAlignment = HorizontalAlignment.Stretch;
+                img.Stretch = Stretch.Fill;
                 img.Source = new BitmapImage(new Uri(plan.Object.urlImageLink));
                 gridFront.Children.Add(img);
 
@@ -631,15 +634,15 @@ namespace PFE_WPF
 
                 var plann = plan.Object.plan;
                 var camera = plan.Object.camera;
-                var cardSD = plan.Object.camera;
-                var decor = plan.Object.camera;
-                var effetIN = plan.Object.camera;
-                var effetJN = plan.Object.camera;
-                var hauteur = plan.Object.camera;
-                var objectif = plan.Object.camera;
-                var sonOption = plan.Object.camera;
-                var distance = plan.Object.camera;
-                info.Click += (Object, RoutedEventArgs) => { Plan_Info_Click(more, e, mt, sequi, camera, cardSD, decor, effetIN, effetJN, hauteur, objectif, sonOption, distance,plann); };
+                var cardSD = plan.Object.cardSd;
+                var decor = plan.Object.decor;
+                var effetIN = plan.Object.effetIN;
+                var effetJN = plan.Object.effetJN;
+                var hauteur = plan.Object.hauteur;
+                var objectif = plan.Object.objectif;
+                var sonOption = plan.Object.sonOption;
+                var distance = plan.Object.distance;
+                info.Click += (Object, RoutedEventArgs) => { Plan_Info_Click(more, e, mt, sequi, plan.Key, camera, cardSD, decor, effetIN, effetJN, hauteur, objectif, sonOption, distance, plan.Object.urlImageLink); };
 
                 Label lb1 = new Label();
                 Label lb2 = new Label();
@@ -693,9 +696,9 @@ namespace PFE_WPF
                 i++;
             }
         }
-        private void Plan_Info_Click(object sender, RoutedEventArgs e, String mt, String sequi, String camera, String cardSD, String decor, String effetIN, String effetJN, String hauteur, String objectif, String sonOption, String distance,String plann)
+        private void Plan_Info_Click(object sender, RoutedEventArgs e, String mt, String sequi, String plan, String camera, String cardSD, String decor, String effetIN, String effetJN, String hauteur, String objectif, String sonOption, String distance,String src)
         {
-            var PlanInfo = new PlanInfo();
+            var PlanInfo = new PlanInfo(mt,sequi,plan,camera,cardSD,decor,effetIN,effetJN,hauteur,distance,objectif,sonOption,src);
             PlanInfo.Left = 890;
             PlanInfo.Top = 10;
             PlanInfo.Width = 480;

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PFE_WPF"
         mc:Ignorable="d"
-        Title="Recherche Prises" Height="300" Width="300"
+        Title="Recherche Prises" Height="700" Width="480"
         WindowStyle="ToolWindow" ResizeMode="NoResize"
           WindowStartupLocation="Manual" >
     <Window.Resources>
@@ -31,17 +31,16 @@
                     <ColumnDefinition Width="195*"/>
                     <ColumnDefinition Width="67*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Qualité :" Margin="-10,-10,10,10"></Label>
-                <Button x:Name="valider" Content="importer" Height="Auto" Margin="-8,24,126,-7" Click="valider_Click"/>
+                <Label Content="Qualité :" Margin="-10,-9,10,9" FontFamily="Poplar Std" FontSize="16"></Label>
+                <Button x:Name="valider" Content="importer" Height="Auto" Margin="-3,22,234,-10" Click="valider_Click" />
                 <materialDesign:RatingBar x:Name="cha" Value="3" Max="3" Margin="44,-9,74,23"></materialDesign:RatingBar>
             </Grid>
         </materialDesign:ColorZone>
         <ScrollViewer  
-            Margin="0,73,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto">
-            <Grid>
-
-            </Grid>
-
-        </ScrollViewer>
+            Margin="0,73,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto"/>
+        <DatePicker Margin="139,10,245,621" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Date"/>
+        <TextBox x:Name="seq" Margin="418,-16,8,621" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Plan"/>
+        <TextBox x:Name="plan" Margin="328,-16,64,621" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Séquence"/>
+        <TextBox x:Name="prise" Margin="244,-29,152,621" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Prise"/>
     </Grid>
 </Window>

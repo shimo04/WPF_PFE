@@ -27,12 +27,12 @@
     <Grid>
         <materialDesign:ColorZone Mode="Accent" Padding="16" Height="73">
         </materialDesign:ColorZone>
-        <materialDesign:Card Height="619" Margin="10,43,10,0">
-            <Grid>
-                <materialDesign:Chip x:Name="camera_Copy"                                  
+        <materialDesign:Card Height="597" Margin="10,47,10,0" FontWeight="Bold">
+            <Grid Margin="0,38,0,-318">
+                <materialDesign:Chip x:Name="camera"                                  
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,28,0,516" Width="272">
+                Margin="80,28,0,516" Width="272" FontFamily="Hobo Std" FontWeight="Bold">
                     <materialDesign:Chip.Icon>
                         <materialDesign:PackIcon Kind="Camera"/>
                     </materialDesign:Chip.Icon>
@@ -40,7 +40,7 @@
                 <materialDesign:Chip x:Name="cardSD"                                  
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,65,0,479" Width="272">
+                Margin="80,65,0,479" Width="272" FontFamily="Hobo Std" FontWeight="Bold">
                     <materialDesign:Chip.Icon>
                         <materialDesign:PackIcon Kind="Cards"/>
                     </materialDesign:Chip.Icon>
@@ -49,7 +49,7 @@
                 <materialDesign:Chip x:Name="decor"                                  
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,102,0,442" Width="272">
+                Margin="80,102,0,442" Width="272" FontFamily="Hobo Std" FontWeight="Bold">
                     <materialDesign:Chip.Icon>
                         <materialDesign:PackIcon Kind="Image"/>
                     </materialDesign:Chip.Icon>
@@ -58,33 +58,39 @@
                 <materialDesign:Chip x:Name="effetIN" Icon="E"                             
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,139,0,405" Width="272"/>
+                Margin="80,139,0,405" Width="272" FontFamily="Hobo Std" FontWeight="Bold"/>
 
                 <materialDesign:Chip x:Name="effetJN" Icon="E"                             
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,176,0,368" Width="272"/>
+                Margin="80,176,0,368" Width="272" FontFamily="Hobo Std" FontWeight="Bold"/>
 
                 <materialDesign:Chip x:Name="hauteur" Icon="H"                             
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,213,0,331" Width="272"/>
+                Margin="80,213,0,331" Width="272" FontFamily="Hobo Std" FontWeight="Bold"/>
 
                 <materialDesign:Chip x:Name="distance" Icon="D"                             
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,251,0,293" Width="272"/>
+                Margin="80,251,0,293" Width="272" FontFamily="Hobo Std" FontWeight="Bold"/>
 
                 <materialDesign:Chip x:Name="sonOption" Icon="S"                             
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,326,0,218" Width="272"/>
+                Margin="80,326,0,218" Width="272" FontFamily="Hobo Std" FontWeight="Bold"/>
 
                 <materialDesign:Chip x:Name="objectif" Icon="O"                             
                 IconBackground="{DynamicResource PrimaryHueDarkBrush}"
                 IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Margin="80,289,0,255" Width="272"/>
+                Margin="80,289,0,255" Width="272" FontFamily="Hobo Std" FontWeight="Bold"/>
+                <Image Name="imgPlan" Margin="0,-27,0,697" Stretch="Fill"></Image>
             </Grid>
         </materialDesign:Card>
+        <materialDesign:Chip x:Name="entetePlan"                                  
+            IconBackground="{DynamicResource PrimaryHueDarkBrush}"
+            IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+            Margin="80,14,0,613" Width="306" FontFamily="Trajan Pro" FontWeight="Bold" Height="Auto">
+        </materialDesign:Chip>
     </Grid>
 </Window>
