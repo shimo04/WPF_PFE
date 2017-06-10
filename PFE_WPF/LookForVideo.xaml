@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Recherche Prises" Height="700" Width="480"
         WindowStyle="ToolWindow" ResizeMode="NoResize"
-          WindowStartupLocation="Manual" >
+          WindowStartupLocation="Manual" Loaded="Window_Loaded" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,29 +26,36 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <materialDesign:ColorZone Mode="Accent" Padding="16" Height="73">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="52*"/>
+        </Grid.ColumnDefinitions>
+        <materialDesign:ColorZone Mode="Accent" Padding="16" Height="49" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="195*"/>
                     <ColumnDefinition Width="67*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Qualité :" Margin="-10,-9,10,9" FontFamily="Poplar Std" FontSize="16"></Label>
-                <materialDesign:RatingBar x:Name="cha" Value="3" Max="3" Margin="44,-9,74,23"></materialDesign:RatingBar>
             </Grid>
         </materialDesign:ColorZone>
-        <materialDesign:ColorZone Mode="Light" Padding="16" Height="53" Margin="0,74,0,0">
+        <materialDesign:ColorZone Mode="Light" Padding="16" Height="69" Margin="0,49,0,0" Grid.ColumnSpan="2">
         </materialDesign:ColorZone>
-        
-        <DatePicker Margin="139,10,245,621"/>
-        <TextBox x:Name="seq" Margin="418,-16,8,621" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Plan"/>
-        <TextBox x:Name="plan" Margin="328,-16,64,621" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Séquence"/>
-        <TextBox x:Name="prise" Margin="244,-29,152,621" FontSize="16" materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Prise"/>
-        <Button x:Name="valider" Content="importer" Height="Auto" Margin="189,84,187,550" Click="valider_Click" />
+        <materialDesign:ColorZone Mode="Accent" Padding="16" Height="49" Margin="0,118,0,0" Grid.ColumnSpan="2">
+        </materialDesign:ColorZone>
         <ScrollViewer  
-            Margin="0,122,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto">
+            Margin="0,167,0,0" VerticalScrollBarVisibility = "Auto" HorizontalScrollBarVisibility ="Auto" Grid.ColumnSpan="2">
             <Grid Name="gr">
-                
+
             </Grid>
         </ScrollViewer>
+        <Button x:Name="valider" Content="importer" Height="Auto" Margin="188,129,188,505" Click="valider_Click" Grid.ColumnSpan="2" />
+        <Label Content="Qualité :" Margin="5,60,156,559" FontFamily="Poplar Std" FontSize="16"/>
+        <materialDesign:RatingBar x:Name="cha" Value="3" Max="3" Margin="51,60,87,559"/>
+        <ComboBox x:Name="ComboBoxSequences" materialDesign:HintAssist.Hint="Sélectionner Seq" HorizontalAlignment="Left" Height="28" Margin="187,60,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" SelectionChanged="ComboBoxSequences_SelectionChanged"/>
+        <ComboBox x:Name="ComboBoxPlans"  materialDesign:HintAssist.Hint="Sélectionner Plan" HorizontalAlignment="Left" Height="28" Margin="134,60,0,0" VerticalAlignment="Top" Width="115" Grid.Column="1"/>
+        <materialDesign:Chip Name="nomFilm" Margin="101,6,0,632" Grid.ColumnSpan="2" Width="261" Height="Auto" ></materialDesign:Chip>
+        <Label Content="Séquence :" Margin="125,60,11,559" FontFamily="Poplar Std" FontSize="16"/>
+        <Label Content="Plan :" Margin="99,61,122,559" FontFamily="Poplar Std" FontSize="16" Grid.Column="1"/>
+
     </Grid>
 </Window>
