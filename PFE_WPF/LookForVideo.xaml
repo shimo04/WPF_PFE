@@ -48,7 +48,7 @@
 
             </Grid>
         </ScrollViewer>
-        <Button x:Name="valider" Content="importer" Height="Auto" Margin="188,129,188,505" Click="valider_Click" Grid.ColumnSpan="2" />
+        <Button x:Name="valider" Content="importer" Height="Auto" Margin="116,129,1,505" Click="valider_Click" />
         <Label Content="Qualité :" Margin="5,60,156,559" FontFamily="Poplar Std" FontSize="16"/>
         <materialDesign:RatingBar x:Name="cha" Value="3" Max="3" Margin="51,60,87,559"/>
         <ComboBox x:Name="ComboBoxSequences" materialDesign:HintAssist.Hint="Sélectionner Seq" HorizontalAlignment="Left" Height="28" Margin="187,60,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" SelectionChanged="ComboBoxSequences_SelectionChanged"/>
@@ -56,6 +56,7 @@
         <materialDesign:Chip Name="nomFilm" Margin="101,6,0,632" Grid.ColumnSpan="2" Width="261" Height="Auto" ></materialDesign:Chip>
         <Label Content="Séquence :" Margin="125,60,11,559" FontFamily="Poplar Std" FontSize="16"/>
         <Label Content="Plan :" Margin="99,61,122,559" FontFamily="Poplar Std" FontSize="16" Grid.Column="1"/>
+        <Button x:Name="pathChoisi" Content="Path" Height="Auto" Margin="29,129,132,505" Grid.Column="1" Click="pathChoisi_Click" />
 
     </Grid>
 </Window>

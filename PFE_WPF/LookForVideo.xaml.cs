@@ -27,6 +27,7 @@ namespace PFE_WPF
         public List<string> listPr = new List<string>();
         public String id;
         public String mv;
+        public String ResPathChoisi;
         public LookForVideo(String cle,String mov)
         {
             InitializeComponent();
@@ -40,6 +41,11 @@ namespace PFE_WPF
 
         private async void valider_Click(object sender, RoutedEventArgs e)
         {
+            pathChoisi.IsEnabled = false;
+
+            DirectoryInfo di = new DirectoryInfo(Environment.ExpandEnvironmentVariables(ResPathChoisi));
+            DirectoryInfo diMovie = di.CreateSubdirectory(mv);
+
             listPr.Clear();
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
@@ -61,6 +67,9 @@ namespace PFE_WPF
 
             if (ComboBoxSequences.SelectedItem.ToString() != "tout" && ComboBoxPlans.SelectedItem.ToString() != "tout")
             {
+                DirectoryInfo diSeq = diMovie.CreateSubdirectory(ComboBoxSequences.SelectedItem.ToString());
+                DirectoryInfo diPlan = diSeq.CreateSubdirectory(ComboBoxPlans.SelectedItem.ToString());
+
                 listPr.Clear();
                 gr.Children.Clear();
                 gr.RowDefinitions.Clear();
@@ -95,20 +104,23 @@ namespace PFE_WPF
                     if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         string[] files = Directory.GetFiles(browse.SelectedPath); ;
+                        DirectoryInfo diSrc = new DirectoryInfo(Environment.ExpandEnvironmentVariables(browse.SelectedPath));
+                        FileInfo[] fi = diSrc.GetFiles();
+
                         foreach (String pr in listPr)
                         {
-                            foreach (String s in files)
+                            foreach (FileInfo s in fi)
                             {
-                                if (System.IO.Path.GetFileName(s) == pr)
+                                if (s.Name == pr)
                                 {
-
+                                    s.CopyTo(diPlan.FullName + "\\" + s.Name, true);
                                     StackPanel stackMedia = new StackPanel();
                                     stackMedia.HorizontalAlignment = HorizontalAlignment.Center;
                                     stackMedia.VerticalAlignment = VerticalAlignment.Center;
                                     stackMedia.Orientation = Orientation.Vertical;
 
                                     MediaElement myMedia = new MediaElement();
-                                    myMedia.Source = new Uri(s, UriKind.RelativeOrAbsolute);
+                                    myMedia.Source = new Uri(s.FullName, UriKind.RelativeOrAbsolute);
                                     myMedia.LoadedBehavior = MediaState.Manual;
                                     myMedia.Width = 440;
 
@@ -218,7 +230,7 @@ namespace PFE_WPF
 
                                 Button rechercher = new Button();
                                 rechercher.Content = "rechercher";
-                                rechercher.Click += (Object, RoutedEventArgs) => { RechercherVideo(sender, e, pr, i, ErreurZone); };
+                                rechercher.Click += (Object, RoutedEventArgs) => { RechercherVideo(sender, e, pr, i, ErreurZone, diPlan); };
 
                                 PackIcon ic = new PackIcon();
                                 ic.Kind = PackIconKind.Refresh;
@@ -248,6 +260,7 @@ namespace PFE_WPF
             }
             else if (ComboBoxSequences.SelectedItem.ToString() == "tout")
             {
+                DirectoryInfo diTout = diMovie.CreateSubdirectory("Toute les prises");
                 listPr.Clear();
                 gr.Children.Clear();
                 gr.RowDefinitions.Clear();
@@ -288,13 +301,16 @@ namespace PFE_WPF
 
                     if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        string[] files = Directory.GetFiles(browse.SelectedPath); ;
+                        string[] files = Directory.GetFiles(browse.SelectedPath);
+                        DirectoryInfo diSrc = new DirectoryInfo(Environment.ExpandEnvironmentVariables(browse.SelectedPath));
+                        FileInfo[] fi = diSrc.GetFiles();
                         foreach (String pr in listPr)
                         {
-                            foreach (String s in files)
+                            foreach (FileInfo s in fi)
                             {
-                                if (System.IO.Path.GetFileName(s) == pr)
+                                if (s.Name == pr)
                                 {
+                                    s.CopyTo(diTout.FullName + "\\" + s.Name, true);
 
                                     StackPanel stackMedia = new StackPanel();
                                     stackMedia.HorizontalAlignment = HorizontalAlignment.Center;
@@ -302,7 +318,7 @@ namespace PFE_WPF
                                     stackMedia.Orientation = Orientation.Vertical;
 
                                     MediaElement myMedia = new MediaElement();
-                                    myMedia.Source = new Uri(s, UriKind.RelativeOrAbsolute);
+                                    myMedia.Source = new Uri(s.FullName, UriKind.RelativeOrAbsolute);
                                     myMedia.LoadedBehavior = MediaState.Manual;
                                     myMedia.Width = 440;
 
@@ -412,7 +428,7 @@ namespace PFE_WPF
 
                                 Button rechercher = new Button();
                                 rechercher.Content = "rechercher";
-                                rechercher.Click += (Object, RoutedEventArgs) => { RechercherVideo(sender, e, pr, i, ErreurZone); };
+                                rechercher.Click += (Object, RoutedEventArgs) => { RechercherVideo(sender, e, pr, i, ErreurZone, diTout); };
 
                                 PackIcon ic = new PackIcon();
                                 ic.Kind = PackIconKind.Refresh;
@@ -440,7 +456,7 @@ namespace PFE_WPF
             }
         }
 
-        public void RechercherVideo(Object sender, RoutedEventArgs e, String nomPrise,int i,ColorZone Error)
+        public void RechercherVideo(Object sender, RoutedEventArgs e, String nomPrise,int i,ColorZone Error, DirectoryInfo dir)
         {
             System.Windows.Forms.FolderBrowserDialog browse = new System.Windows.Forms.FolderBrowserDialog();
             browse.RootFolder = Environment.SpecialFolder.Desktop;
@@ -450,19 +466,21 @@ namespace PFE_WPF
             var test = false;
             if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-
-                string[] files = Directory.GetFiles(browse.SelectedPath);
-                foreach (String s in files)
+                string[] files = Directory.GetFiles(browse.SelectedPath); ;
+                DirectoryInfo diSrc = new DirectoryInfo(Environment.ExpandEnvironmentVariables(browse.SelectedPath));
+                FileInfo[] fi = diSrc.GetFiles();
+                foreach (FileInfo s in fi)
                 {
-                        if (System.IO.Path.GetFileName(s) == nomPrise)
+                        if (s.Name == nomPrise)
                         {
+                            s.CopyTo(dir.FullName + "\\" + s.Name, true);
                             StackPanel stackMedia = new StackPanel();
                             stackMedia.HorizontalAlignment = HorizontalAlignment.Center;
                             stackMedia.VerticalAlignment = VerticalAlignment.Center;
                             stackMedia.Orientation = Orientation.Vertical;
 
                             MediaElement myMedia = new MediaElement();
-                            myMedia.Source = new Uri(s, UriKind.RelativeOrAbsolute);
+                            myMedia.Source = new Uri(s.FullName, UriKind.RelativeOrAbsolute);
                             myMedia.LoadedBehavior = MediaState.Manual;
                             myMedia.Width = 440;
 
@@ -570,7 +588,7 @@ namespace PFE_WPF
 
                     Button rechercher = new Button();
                     rechercher.Content = "rechercher";
-                    rechercher.Click += (Object, RoutedEventArgs) => { RechercherVideo(sender, e, nomPrise, i, Error); };
+                    rechercher.Click += (Object, RoutedEventArgs) => { RechercherVideo(sender, e, nomPrise, i, Error,dir); };
 
                     PackIcon ic = new PackIcon();
                     ic.Kind = PackIconKind.Refresh;
@@ -626,15 +644,12 @@ namespace PFE_WPF
                 mute.Content = muteIcon;
             }
         }
-        public void mediaVolumeSlider(Object sender, RoutedPropertyChangedEventArgs<double> r, MediaElement myMedia,Slider mediaVolumeSlider)
-        {
-            myMedia.Volume = (double)mediaVolumeSlider.Value; 
-        }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ComboBoxPlans.IsEnabled = false;
             valider.IsEnabled = false;
+            pathChoisi.IsEnabled = false;
             nomFilm.HorizontalAlignment = HorizontalAlignment.Center;
             nomFilm.HorizontalContentAlignment = HorizontalAlignment.Center;
             nomFilm.Content = "Film : " + mv;
@@ -656,12 +671,14 @@ namespace PFE_WPF
             {
                 ComboBoxPlans.IsEnabled = false;
                 valider.IsEnabled = true;
+                pathChoisi.IsEnabled = true;
             }
             else
             {
                 gr.Children.Clear();
                 gr.RowDefinitions.Clear();
                 valider.IsEnabled = false;
+                pathChoisi.IsEnabled = false;
                 ComboBoxPlans.IsEnabled = true;
                 ComboBoxPlans.Items.Clear();
                 var firebase = new FirebaseClient("https://applicationcliente.firebaseio.com/");
@@ -672,10 +689,6 @@ namespace PFE_WPF
                 }
                 ComboBoxPlans.Items.Add("tout");
             }
-           // if (ComboBoxSequences.SelectedItem.ToString() != "Sélectionner Seq" || ComboBoxPlans.SelectedItem.ToString() != "Sélectionner ¨Plan")
-              //  valider.IsEnabled = true;
-           // else
-                //valider.IsEnabled = false;
         }
 
         private void ComboBoxPlans_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -683,9 +696,28 @@ namespace PFE_WPF
             gr.Children.Clear();
             gr.RowDefinitions.Clear();
             if (ComboBoxPlans.SelectedItem.ToString() != "Sélectionner ¨Plan")
+            {
                 valider.IsEnabled = true;
+                pathChoisi.IsEnabled = true;
+            }
             else
+            {
                 valider.IsEnabled = false;
+                pathChoisi.IsEnabled = false;
+            }
+        }
+
+        private void pathChoisi_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog browse = new System.Windows.Forms.FolderBrowserDialog();
+            browse.RootFolder = Environment.SpecialFolder.Desktop;
+            browse.Description = " +++ select folder +++";
+            browse.ShowNewFolderButton = false;
+
+            if (browse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ResPathChoisi = System.IO.Path.GetFullPath(browse.SelectedPath);
+            }
         }
     }
 }
