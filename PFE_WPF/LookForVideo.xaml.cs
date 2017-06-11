@@ -365,7 +365,7 @@ namespace PFE_WPF
                                     stackMediaButtons.Children.Add(lb3);
                                     stackMediaButtons.Children.Add(mute);
 
-
+                                    //
                                     stackMedia.Children.Add(espace1);
                                     stackMedia.Children.Add(stackEnteteMedia);
                                     stackMedia.Children.Add(espace2);
