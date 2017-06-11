@@ -52,7 +52,7 @@
         <Label Content="Qualité :" Margin="5,60,156,559" FontFamily="Poplar Std" FontSize="16"/>
         <materialDesign:RatingBar x:Name="cha" Value="3" Max="3" Margin="51,60,87,559"/>
         <ComboBox x:Name="ComboBoxSequences" materialDesign:HintAssist.Hint="Sélectionner Seq" HorizontalAlignment="Left" Height="28" Margin="187,60,0,0" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" SelectionChanged="ComboBoxSequences_SelectionChanged"/>
-        <ComboBox x:Name="ComboBoxPlans"  materialDesign:HintAssist.Hint="Sélectionner Plan" HorizontalAlignment="Left" Height="28" Margin="134,60,0,0" VerticalAlignment="Top" Width="115" Grid.Column="1"/>
+        <ComboBox x:Name="ComboBoxPlans"  materialDesign:HintAssist.Hint="Sélectionner Plan" HorizontalAlignment="Left" Height="28" Margin="134,60,0,0" VerticalAlignment="Top" Width="115" Grid.Column="1" SelectionChanged="ComboBoxPlans_SelectionChanged"/>
         <materialDesign:Chip Name="nomFilm" Margin="101,6,0,632" Grid.ColumnSpan="2" Width="261" Height="Auto" ></materialDesign:Chip>
         <Label Content="Séquence :" Margin="125,60,11,559" FontFamily="Poplar Std" FontSize="16"/>
         <Label Content="Plan :" Margin="99,61,122,559" FontFamily="Poplar Std" FontSize="16" Grid.Column="1"/>
